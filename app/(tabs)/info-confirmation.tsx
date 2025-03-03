@@ -31,17 +31,24 @@ export default function InfoConfirmationScreen() {
       <ThemedText>Is this correct?</ThemedText>
 
       <ThemedText>
-        <p>Your name is <b>{name}</b></p> <br />
+        <p>Your name &rarr; <b>{name}</b></p> <br />
         <p>You are <b>{age} years old </b> </p> <br />
-        <p>Your current routine is <b>{routine}</b></p> <br />
-        <p>Your skincare goal is <b>{goal}</b></p>
+        <p>Your current routine &rarr; <b>{routine}</b></p> <br />
+        <p>Your skincare goal &rarr; <b>{goal}</b></p>
       </ThemedText>
 
       <TouchableOpacity onPress={() => router.push('/') }>
-           <ThemedText style={styles.buttonText}>No Go Back</ThemedText> 
+           <ThemedText style={styles.buttonText}>No</ThemedText> 
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => router.push('/skincare-knowledge') }>
+      <TouchableOpacity 
+                  onPress={() => router.push({
+                    pathname: '/routine',
+                    params: {
+                       name: name,
+                            }
+                          })}
+        >
            <ThemedText style={styles.buttonText}>Yep!</ThemedText> 
       </TouchableOpacity>
     </ThemedView>

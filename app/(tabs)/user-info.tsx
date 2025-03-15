@@ -1,16 +1,40 @@
-import { router } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
+import { Image, StyleSheet, TouchableOpacity, TextInput, View } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
+import { Console } from 'console';
 
 export default function UserInfoScreen() {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
 
 
+  const params = useLocalSearchParams();
+  const { image, image2 } = params;
+  
+  console.log("Image URI received:", image); // Add this to debug
+
   return (
     <ThemedView style={styles.container}>
+
+<View style={{ width: 300, height: 300 }}>
+          <Image
+              source={{uri: typeof image === 'string' ? image : Array.isArray(image) ? image[0] : ''}}
+              resizeMode="contain"
+              style={{ width: '100%', height: '100%' }}
+          />
+      </View>
+
+      <View style={{ width: 300, height: 300 }}>
+          <Image
+              source={{uri: typeof image2 === 'string' ? image2 : Array.isArray(image2) ? image2[0] : ''}}
+              resizeMode="contain"
+              style={{ width: '100%', height: '100%' }}
+          />
+      </View>
+    
+
 
     <TouchableOpacity
      onPress={() => router.push('/')}
@@ -57,7 +81,9 @@ export default function UserInfoScreen() {
             pathname: '/skincare-knowledge',
             params: {
               name: name,
-                age: age,
+              age: age,
+              image: image,
+              image2: image2
                     }
                   })}
       >

@@ -14,7 +14,7 @@ export default function Routine() {
     function displaySkinCareRoutine() {
       return(
         <div>
-          <p>This is your peronalized SkinCare Routine</p>
+          <p>This is your personalized SkinCare Routine</p>
         </div>
       )
     }
@@ -28,58 +28,61 @@ export default function Routine() {
     }
 
     return (
-
         <ThemedView style={styles.container}>
+          
+          
+          { 
+            analysisOrRoutine === 'routine'
+            ? (
 
-            <Image 
-              source={require('@/assets/images/skinglow-logo.png')} 
-            />
-            
-            {
-              analysisOrRoutine === 'analysis'
-              ?
-            <TouchableOpacity
-              style={styles.selectedButton}
-              onPress={() => toggleAnalysisOrRoutine('analysis')}
-            >
-              Skin Analysis
-            </TouchableOpacity>
-            :
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => toggleAnalysisOrRoutine('analysis')}
-            >
-              Skin Analysis
-            </TouchableOpacity>
+                  <ThemedText style={styles.selectedButton}>
+                    Recommended Routine
+                  </ThemedText>
 
-            }
+              )
+            : (
+                <ThemedText 
+                  style={styles.button}
+                  onPress={() => toggleAnalysisOrRoutine('routine')}
+                >
+                  Recommended Routine
+                </ThemedText>
+              )
+          }
 
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => toggleAnalysisOrRoutine('routine')}
-            >
-              Recommended Routine
-            </TouchableOpacity>
+          { 
+            analysisOrRoutine === 'analysis'
+            ? (
+                  <ThemedText style={styles.selectedButton}>
+                    Skin Analysis
+                  </ThemedText>
+              )
+            : (
+                <ThemedText 
+                  style={styles.button}
+                  onPress={() => toggleAnalysisOrRoutine('analysis')}
+                >
+                  Skin Analysis
+                </ThemedText>
+              )
+          }
 
-            {
-               analysisOrRoutine === 'analysis'
-               
-               ?
-               
-               <div>
-                  <ThemedText><b>{name} - Here is your Recommended Routine</b></ThemedText> <br />
-                  {displaySkinCareRoutine()}   
-               </div>
-              
-              :
-              
-              <div>
-                  <ThemedText><b>{name} - Here is your Personalized Skin Analysis</b></ThemedText> <br />
-                  {displaySkinCareAnalysis()}
-               </div>
-            }
-
-      </ThemedView>
+        {
+          analysisOrRoutine === 'analysis'
+          ?
+          (
+            <ThemedText>
+                 {displaySkinCareAnalysis()}
+            </ThemedText>
+          )
+          :
+          (
+            <ThemedText>
+                 {displaySkinCareRoutine()}
+            </ThemedText>
+          )
+         }
+        </ThemedView>
     );
 }
 
@@ -90,18 +93,17 @@ const styles = StyleSheet.create({
       alignItems: 'center', 
     },
     selectedButton: {
+      backgroundColor: '#E57BFF',
+      height: 60,
+      width: 200,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    button: {
       backgroundColor: 'pink',
       height: 60,
       width: 200,
       justifyContent: 'center',
       alignItems: 'center',
-    },
-
-    button: {
-      backgroundColor: 'gray',
-      height: 60,
-      width: 200,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
+    }
   });

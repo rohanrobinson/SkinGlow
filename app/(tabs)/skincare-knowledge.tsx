@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function SkincareKnowledgeScreen() {
   
   const params = useLocalSearchParams();
-  const { name, age } = params;
+  const { name, age, image, image2 } = params;
 
   
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -89,6 +89,8 @@ export default function SkincareKnowledgeScreen() {
             routine: userSCRoutine,
             goal: skinImprovementGoal,
             knowledgeLevel: selectedOption, 
+            image: image,
+            image2: image2,
           }
         })}
       >

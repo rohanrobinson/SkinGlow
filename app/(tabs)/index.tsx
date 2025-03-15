@@ -10,20 +10,20 @@ export default function HomeScreen() {
               source={require('@/assets/images/skinglow-logo.png')} 
              />
             <ThemedText type="title">Skin Glow</ThemedText>
-              <ThemedText type="subtitle">Glow into your best self!</ThemedText>
+              <ThemedText type="subtitle">In 3 minutes you'll be put on the path to looking your best!</ThemedText> <br />
               <ThemedText type="subtitle">Easy as <b>1-2-3</b></ThemedText> <br />
           <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">(1) Take some Pictures of Yourself</ThemedText>
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
-            <ThemedText type="subtitle">(2) Answer a Few Questions about Yourself</ThemedText>
+            <ThemedText type="subtitle">(2) X Answer a Few Questions about Yourself</ThemedText>
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
-            <ThemedText type="subtitle">(3) Checkout your Personalized Skin Analysis and Reccomended Routine</ThemedText>
+            <ThemedText type="subtitle"> (3) Checkout your Personalized Skin Analysis and Reccomended Routine</ThemedText>
           </ThemedView> <br />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => router.push('/user-info') }
+            onPress={() => router.push('/take-pics') }
           >
            <ThemedText style={styles.buttonText}>Start</ThemedText>
           </TouchableOpacity>

@@ -13,13 +13,13 @@ export default function HomeScreen() {
               <ThemedText type="subtitle">In 3 minutes you'll be put on the path to looking your best!</ThemedText> <br />
               <ThemedText type="subtitle">Easy as <b>1-2-3</b></ThemedText> <br />
           <ThemedView style={styles.stepContainer}>
-            <ThemedText type="subtitle">(1) Take some Pictures of Yourself</ThemedText>
+            <ThemedText type="subtitle">(1) Take some Pictures</ThemedText>
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
-            <ThemedText type="subtitle">(2) X Answer a Few Questions about Yourself</ThemedText>
+            <ThemedText type="subtitle">(2) Answer a Few Questions </ThemedText>
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
-            <ThemedText type="subtitle"> (3) Checkout your Personalized Skin Analysis and Reccomended Routine</ThemedText>
+            <ThemedText type="subtitle"> (3) Checkout a Report and Routine Personalized for You!</ThemedText>
           </ThemedView> <br />
           <TouchableOpacity
             style={styles.button}

@@ -62,7 +62,7 @@ export default function InfoConfirmationScreen() {
                             }
                           })}
         >
-           <ThemedText style={styles.buttonText}>Yep!</ThemedText> 
+           <ThemedText style={styles.buttonText}>Yes!</ThemedText> 
       </TouchableOpacity>
     </ThemedView>
   );

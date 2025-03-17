@@ -99,7 +99,7 @@ export default function TakePics() {
                 onPress={takePhoto}
                 style={styles.cameraButton}
               >
-                Retake?  
+                <ThemedText>Retake?</ThemedText>  
               </TouchableOpacity>
             }
 
@@ -140,7 +140,7 @@ export default function TakePics() {
                       onPress={takePhoto2}
                       style={styles.cameraButton}
                     >
-                      Retake?  
+                      <ThemedText>Retake?</ThemedText>  
                     </TouchableOpacity>
                   }
 

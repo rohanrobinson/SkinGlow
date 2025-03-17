@@ -18,24 +18,6 @@ export default function UserInfoScreen() {
   return (
     <ThemedView style={styles.container}>
 
-<View style={{ width: 300, height: 300 }}>
-          <Image
-              source={{uri: typeof image === 'string' ? image : Array.isArray(image) ? image[0] : ''}}
-              resizeMode="contain"
-              style={{ width: '100%', height: '100%' }}
-          />
-      </View>
-
-      <View style={{ width: 300, height: 300 }}>
-          <Image
-              source={{uri: typeof image2 === 'string' ? image2 : Array.isArray(image2) ? image2[0] : ''}}
-              resizeMode="contain"
-              style={{ width: '100%', height: '100%' }}
-          />
-      </View>
-    
-
-
     <TouchableOpacity
      onPress={() => router.push('/')}
     >

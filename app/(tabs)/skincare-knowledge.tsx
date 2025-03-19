@@ -27,28 +27,28 @@ export default function SkincareKnowledgeScreen() {
       />
     </TouchableOpacity>
      
-      <ThemedText>Help us Get to Know You!</ThemedText>
-      <br />
+      <ThemedText>We want to Know more About You!</ThemedText>
       <ThemedText>How much do you Know about Skincare?</ThemedText>
-      {knowledgeOptions.map((option) => (
-          <TouchableOpacity
-            key={option}
-            style={[
-              styles.optionButton,
-              selectedOption === option && styles.selectedOption
-            ]}
-            onPress={() => setSelectedOption(option)}
-           >
-            <ThemedText style={[
-              styles.optionText,
-              selectedOption === option && styles.selectedOptionText
-            ]}>
-              {option}
-            </ThemedText>
-          </TouchableOpacity>
-        ))}
+      <ThemedView style={styles.optionsRow}>
+          {knowledgeOptions.map((option) => (
+              <TouchableOpacity
+                  key={option}
+                  style={[
+                      styles.optionButton,
+                      selectedOption === option && styles.selectedOption
+                  ]}
+                  onPress={() => setSelectedOption(option)}
+              >
+                  <ThemedText style={[
+                      styles.optionText,
+                      selectedOption === option && styles.selectedOptionText
+                  ]}>
+                      {option}
+                  </ThemedText>
+              </TouchableOpacity>
+          ))}
+      </ThemedView>
 
-        <br />
         <ThemedText>What is your current Skincare Routine if you have one?</ThemedText>
         <TextInput
         style={styles.input}
@@ -60,9 +60,6 @@ export default function SkincareKnowledgeScreen() {
         autoCorrect={false}
         autoCapitalize="none"
       /> 
-
-
-        <br />
 
     <ThemedText>How do you want to improve your skin?</ThemedText>
         <TextInput
@@ -144,6 +141,14 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 16,
     textAlign: 'center',
+  },
+  optionsRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,  // Space between buttons
+    flexWrap: 'wrap',  // In case buttons need to wrap
+    backgroundColor: '#EFE0F2', 
   },
   selectedOptionText: {
     color: 'white',  // White text for better contrast on pink background

@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -67,6 +67,7 @@ export default function TakePics() {
     
 
     return (    
+      <ScrollView>
         <ThemedView style={styles.container}>
 
             <Image 
@@ -74,7 +75,7 @@ export default function TakePics() {
              />
 
 
-            <ThemedText style={{ fontWeight: 'bold' }}>We'll take some pictures to get started</ThemedText>
+            <ThemedText style={styles.defaultText}>We'll take some pictures to get started</ThemedText>
 
 
 
@@ -100,7 +101,7 @@ export default function TakePics() {
                 onPress={takePhoto}
                 style={styles.cameraButton}
               >
-                <ThemedText>Retake?</ThemedText>  
+                <ThemedText style={styles.defaultText}>Retake?</ThemedText>  
               </TouchableOpacity>
             }
 
@@ -141,7 +142,7 @@ export default function TakePics() {
                       onPress={takePhoto2}
                       style={styles.cameraButton}
                     >
-                      <ThemedText>Retake?</ThemedText>  
+                      <ThemedText style={styles.defaultText}>Retake?</ThemedText>  
                     </TouchableOpacity>
                   }
 
@@ -178,15 +179,17 @@ export default function TakePics() {
                 }
             })}
             >
-              Next
+              <ThemedText style={styles.defaultText}>Next</ThemedText>
             </TouchableOpacity>
               :
               <ThemedView style={styles.container}>
-    <ThemedText>😊<ThemedText style={{ fontStyle: 'italic' }}> Tap the camera icons!</ThemedText></ThemedText>
-</ThemedView>
+                    <ThemedText style={styles.defaultText }> Tap the camera icons!</ThemedText>   
+              </ThemedView>
             }
 
         </ThemedView>
+
+    </ScrollView>
     )
   }
 
@@ -197,6 +200,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#EFE0F2',
       alignItems: 'center', 
     },
+    defaultText: {
+      color: 'black'
+    },
+    scrollContainer: {
+       flexGrow: 1,
+    },
     titleContainer: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -205,7 +214,7 @@ const styles = StyleSheet.create({
     },
     stepContainer: {
       alignItems: 'center',
-      backgroundColor: '#EFE0F2'
+      backgroundColor: '#EFE0F2',
     },
     button: {
       backgroundColor: '#E57BFF',

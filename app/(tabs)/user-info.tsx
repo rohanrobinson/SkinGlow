@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity, TextInput, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
@@ -16,6 +16,7 @@ export default function UserInfoScreen() {
   console.log("Image URI received:", image); // Add this to debug
 
   return (
+  <ScrollView contentContainerStyle={styles.scrollContainer}>
     <ThemedView style={styles.container}>
 
     <TouchableOpacity
@@ -25,9 +26,9 @@ export default function UserInfoScreen() {
         source={require('@/assets/images/skinglow-logo.png')} 
       />
     </TouchableOpacity>
-      <ThemedText>Help Us Get to Know You!</ThemedText>
+      <ThemedText style={styles.defaultText}>Help Us Get to Know You!</ThemedText>
 
-      <ThemedText>Name</ThemedText>
+      <ThemedText style={styles.defaultText}>Name</ThemedText>
       <TextInput
         style={styles.input}
         onChangeText={setName}
@@ -39,7 +40,7 @@ export default function UserInfoScreen() {
         autoCapitalize="none"
       /> 
 
-      <ThemedText>Age</ThemedText>
+      <ThemedText style={styles.defaultText}>Age</ThemedText>
       <TextInput
         style={styles.input}
         onChangeText={setAge}
@@ -72,6 +73,7 @@ export default function UserInfoScreen() {
            <ThemedText style={styles.buttonText}>&rarr;</ThemedText> 
       </TouchableOpacity>
     </ThemedView>
+  </ScrollView>
   );
 }
 
@@ -80,6 +82,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: '#EFE0F2',
     alignItems: 'center', 
+  },
+  scrollContainer: {
+    flexGrow: 1,
   },
   input: {
     width: '25%',
@@ -105,5 +110,8 @@ const styles = StyleSheet.create({
     width: 200,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  defaultText: {
+    color: 'black'
+  },
 });

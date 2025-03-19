@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
@@ -12,6 +12,8 @@ export default function InfoConfirmationScreen() {
   console.log("Image URI received:", image); // Add this to debug
 
   return (
+  
+  <ScrollView contentContainerStyle={styles.scrollContainer}>
     <ThemedView style={styles.container}>
 
     <TouchableOpacity
@@ -22,16 +24,16 @@ export default function InfoConfirmationScreen() {
       />
     </TouchableOpacity>
 
-      <ThemedText style={{fontWeight: 'bold'}}>Here's what we've learned about you!</ThemedText>
+      <ThemedText style={styles.defaultText}>Here's what we've learned about you!</ThemedText>
 
-      <ThemedText>Is this correct?</ThemedText>
+      <ThemedText style={styles.defaultText}>Is this correct?</ThemedText>
 
       <ThemedText>
-        <ThemedText>Your name &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{name}</ThemedText></ThemedText>
-        <ThemedText>You are <ThemedText style={{ fontWeight: 'bold' }}>{age} years old</ThemedText></ThemedText>
-        <ThemedText>Your current routine &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{routine}</ThemedText></ThemedText>
-        <ThemedText>Your skincare goal &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{goal}</ThemedText></ThemedText>
-        <ThemedText>Here are the awesome pictures we got of you!</ThemedText>
+        <ThemedText style={styles.defaultText}>Your name &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{name}</ThemedText></ThemedText>
+        <ThemedText style={styles.defaultText}>You are <ThemedText style={{ fontWeight: 'bold' }}>{age} years old</ThemedText></ThemedText>
+        <ThemedText style={styles.defaultText}>Your current routine &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{routine}</ThemedText></ThemedText>
+        <ThemedText style={styles.defaultText}>Your skincare goal &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{goal}</ThemedText></ThemedText>
+        <ThemedText style={styles.defaultText}>Here are the awesome pictures we got of you!</ThemedText>
       </ThemedText>
 
       <View style={{ width: 300, height: 300 }}>
@@ -51,7 +53,7 @@ export default function InfoConfirmationScreen() {
       </View>
 
       <TouchableOpacity onPress={() => router.push('/') }>
-           <ThemedText style={styles.buttonText}>No</ThemedText> 
+           <ThemedText style={styles.defaultText}>No</ThemedText> 
       </TouchableOpacity>
 
       <TouchableOpacity 
@@ -62,9 +64,10 @@ export default function InfoConfirmationScreen() {
                             }
                           })}
         >
-           <ThemedText style={styles.buttonText}>Yes!</ThemedText> 
+           <ThemedText style={styles.defaultText}>Yes!</ThemedText> 
       </TouchableOpacity>
     </ThemedView>
+  </ScrollView>
   );
 }
 
@@ -73,6 +76,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: '#EFE0F2',
     alignItems: 'center', 
+  },
+  scrollContainer: {
+    flexGrow: 1, // Ensures scroll works with flex
   },
   input: {
     width: '25%',
@@ -84,6 +90,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#ddd',
+  },
+  defaultText: {
+    color: 'black'
   },
   buttonText: {
     color: 'black',

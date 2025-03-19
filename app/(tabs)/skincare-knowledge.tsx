@@ -27,8 +27,8 @@ export default function SkincareKnowledgeScreen() {
       />
     </TouchableOpacity>
      
-      <ThemedText>We want to Know more About You!</ThemedText>
-      <ThemedText>How much do you Know about Skincare?</ThemedText>
+      <ThemedText style={styles.defaultText}>We want to Know more About You!</ThemedText>
+      <ThemedText style={styles.defaultText}>How much do you Know about Skincare?</ThemedText>
       <ThemedView style={styles.optionsRow}>
           {knowledgeOptions.map((option) => (
               <TouchableOpacity
@@ -41,6 +41,7 @@ export default function SkincareKnowledgeScreen() {
               >
                   <ThemedText style={[
                       styles.optionText,
+                      styles.defaultText,
                       selectedOption === option && styles.selectedOptionText
                   ]}>
                       {option}
@@ -49,7 +50,7 @@ export default function SkincareKnowledgeScreen() {
           ))}
       </ThemedView>
 
-        <ThemedText>What is your current Skincare Routine if you have one?</ThemedText>
+        <ThemedText style={styles.defaultText}>What is your current Skincare Routine if you have one?</ThemedText>
         <TextInput
         style={styles.input}
         onChangeText={setSCRoutine}
@@ -61,7 +62,7 @@ export default function SkincareKnowledgeScreen() {
         autoCapitalize="none"
       /> 
 
-    <ThemedText>How do you want to improve your skin?</ThemedText>
+    <ThemedText style={styles.defaultText}>How do you want to improve your skin?</ThemedText>
         <TextInput
         style={styles.input}
         onChangeText={setSkinImprovementGoal}
@@ -75,7 +76,7 @@ export default function SkincareKnowledgeScreen() {
     <TouchableOpacity
        onPress={() => router.push('/user-info') }
       >
-           <ThemedText style={styles.buttonText}>&larr;</ThemedText> 
+           <ThemedText style={styles.defaultText}>&larr;</ThemedText> 
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => router.push({
@@ -91,7 +92,7 @@ export default function SkincareKnowledgeScreen() {
           }
         })}
       >
-           <ThemedText style={styles.buttonText}>&rarr;</ThemedText> 
+           <ThemedText style={styles.defaultText}>&rarr;</ThemedText> 
       </TouchableOpacity>
     </ThemedView>
   );
@@ -126,6 +127,9 @@ const styles = StyleSheet.create({
     width: 200,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  defaultText: {
+    color: 'black'
   },
   optionButton: {
     padding: 15,

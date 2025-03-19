@@ -82,13 +82,13 @@ export default function RoutineAnalysis() {
                     <Pressable onPress={() => toggleAnalysisOrRoutine('routine')}
                         style={styles.selectedButton}
                     >
-                      <Text>Routine</Text>
+                      <ThemedText>Routine</ThemedText>
                     </Pressable>
                     : 
                     <Pressable onPress={() => toggleAnalysisOrRoutine('routine')}
                     style={styles.unselectedButton}
                     >
-                      <Text>Routine</Text>
+                      <ThemedText>Routine</ThemedText>
                     </Pressable>
                    }
               </ThemedView>
@@ -98,13 +98,13 @@ export default function RoutineAnalysis() {
                         <Pressable onPress={() => toggleAnalysisOrRoutine('analysis')}
                             style={styles.selectedButton}
                         >
-                          <Text>Analysis</Text>
+                          <ThemedText>Analysis</ThemedText>
                         </Pressable>
                         : 
                         <Pressable onPress={() => toggleAnalysisOrRoutine('analysis')}
                         style={styles.unselectedButton}
                         >
-                          <Text>Analysis</Text>
+                          <ThemedText>Analysis</ThemedText>
                         </Pressable>
                         }
               </ThemedView>
@@ -115,16 +115,9 @@ export default function RoutineAnalysis() {
                 infoType === 'analysis'
                 
                 ?
-
-                <Text>
-                      {displaySkinCareAnalysis()}
-                </Text>
-
+                displaySkinCareAnalysis()
                 :
-
-                <Text>
-                      {displaySkinCareRoutine()}  
-                </Text>
+               displaySkinCareRoutine()  // Remove Text wrapper since the function already returns ThemedText
             }
             
           </ThemedView>
@@ -178,8 +171,7 @@ export default function RoutineAnalysis() {
                                     style={styles.buttonSubmit}
                                     onPress={() => {
                                         // Handle login logic here
-                                        console.log("Username:", username, "Password:", password);
-                                        console.log("thanks " + {name} + " skinglow is ready to assist with all your skincare needs");
+                                        console.log(`thanks ${name} skinglow is ready to assist with all your skincare needs`);
                                         setModalVisible(false);
                                     }}
                                 >

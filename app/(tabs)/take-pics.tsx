@@ -74,7 +74,8 @@ export default function TakePics() {
              />
 
 
-            <ThemedText><b>We'll take some pictures to get started</b></ThemedText>
+            <ThemedText style={{ fontWeight: 'bold' }}>We'll take some pictures to get started</ThemedText>
+
 
 
 
@@ -180,7 +181,9 @@ export default function TakePics() {
               Next
             </TouchableOpacity>
               :
-              <ThemedView style={styles.container}>😊<i> Tap the camera icons!</i></ThemedView>
+              <ThemedView style={styles.container}>
+    <ThemedText>😊<ThemedText style={{ fontStyle: 'italic' }}> Tap the camera icons!</ThemedText></ThemedText>
+</ThemedView>
             }
 
         </ThemedView>

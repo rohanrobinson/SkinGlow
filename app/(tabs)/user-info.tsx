@@ -27,7 +27,7 @@ export default function UserInfoScreen() {
     </TouchableOpacity>
       <ThemedText>Help Us Get to Know You!</ThemedText>
 
-      <p>Name</p>
+      <ThemedText>Name</ThemedText>
       <TextInput
         style={styles.input}
         onChangeText={setName}
@@ -39,7 +39,7 @@ export default function UserInfoScreen() {
         autoCapitalize="none"
       /> 
 
-      <p>Age</p>
+      <ThemedText>Age</ThemedText>
       <TextInput
         style={styles.input}
         onChangeText={setAge}

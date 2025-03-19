@@ -10,8 +10,8 @@ export default function HomeScreen() {
               source={require('@/assets/images/skinglow-logo.png')} 
              />
             <ThemedText type="title">Skin Glow</ThemedText>
-              <ThemedText type="subtitle">In 3 minutes you'll be put on the path to looking your best!</ThemedText> <br />
-              <ThemedText type="subtitle">Easy as <b>1-2-3</b></ThemedText> <br />
+              <ThemedText type="subtitle">In 3 minutes you'll be put on the path to looking your best!</ThemedText> 
+              <ThemedText type="subtitle">Easy as <b>1-2-3</b></ThemedText> 
           <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">(1) Take some Pictures</ThemedText>
           </ThemedView> 
@@ -20,7 +20,7 @@ export default function HomeScreen() {
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle"> (3) Checkout a Report and Routine Personalized for You!</ThemedText>
-          </ThemedView> <br />
+          </ThemedView> 
           <TouchableOpacity
             style={styles.button}
             onPress={() => router.push('/take-pics') }

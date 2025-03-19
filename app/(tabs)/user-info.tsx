@@ -37,7 +37,7 @@ export default function UserInfoScreen() {
         // Optional props:
         autoCorrect={false}
         autoCapitalize="none"
-      /> <br />
+      /> 
 
       <p>Age</p>
       <TextInput
@@ -52,7 +52,7 @@ export default function UserInfoScreen() {
       />
 
       <TouchableOpacity
-            onPress={() => router.push('/') }
+            onPress={() => router.push('/take-pics') }
       >
            <ThemedText style={styles.buttonText}>&larr;</ThemedText> 
 

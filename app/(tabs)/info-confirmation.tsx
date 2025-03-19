@@ -27,9 +27,9 @@ export default function InfoConfirmationScreen() {
       <ThemedText>Is this correct?</ThemedText>
 
       <ThemedText>
-        <p>Your name &rarr; <b>{name}</b></p> <br />
-        <p>You are <b>{age} years old </b> </p> <br />
-        <p>Your current routine &rarr; <b>{routine}</b></p> <br />
+        <p>Your name &rarr; <b>{name}</b></p>
+        <p>You are <b>{age} years old </b> </p> 
+        <p>Your current routine &rarr; <b>{routine}</b></p> 
         <p>Your skincare goal &rarr; <b>{goal}</b></p>
         <p>Here are the awesome pictures we got of you!</p>
       </ThemedText>
@@ -56,7 +56,7 @@ export default function InfoConfirmationScreen() {
 
       <TouchableOpacity 
                   onPress={() => router.push({
-                    pathname: '/routine',
+                    pathname: '/routine-analysis',
                     params: {
                        name: name,
                             }

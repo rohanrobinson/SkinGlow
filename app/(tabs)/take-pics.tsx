@@ -74,7 +74,7 @@ export default function TakePics() {
              />
 
 
-            <ThemedText><b>We'll take some pictures to get started</b></ThemedText><br />
+            <ThemedText><b>We'll take some pictures to get started</b></ThemedText>
 
 
 
@@ -154,16 +154,12 @@ export default function TakePics() {
                           />
                         )
                         :
-                        ""
+                        <ThemedText></ThemedText>
                     }
                     </ThemedView>
 
           </ThemedView>
         </ThemedView>
-
-           
-             <br />
-             <br />
            
             {
               imageDisplayed === true && image2Displayed === true
@@ -184,7 +180,7 @@ export default function TakePics() {
               Next
             </TouchableOpacity>
               :
-              <ThemedView style={styles.container}><br />😊<i> Tap the camera icons!</i></ThemedView>
+              <ThemedView style={styles.container}>😊<i> Tap the camera icons!</i></ThemedView>
             }
 
         </ThemedView>
@@ -247,14 +243,16 @@ const styles = StyleSheet.create({
   },
     rowContainer: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       width: '100%',
       paddingHorizontal: 10,
+      backgroundColor: '#EFE0F2',
 },
   columnContainer: {
-    flex: 1,
+    flex: 0.4,
     marginHorizontal: 5,
     backgroundColor: '#E57BFF',
+    alignItems: 'center',
 },
   });
 

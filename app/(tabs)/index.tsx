@@ -11,7 +11,7 @@ export default function HomeScreen() {
              />
             <ThemedText type="title">Skin Glow</ThemedText>
               <ThemedText type="subtitle">In 3 minutes you'll be put on the path to looking your best!</ThemedText> 
-              <ThemedText type="subtitle">Easy as <b>1-2-3</b></ThemedText> 
+              <ThemedText type="subtitle">Easy as <ThemedText style={{fontWeight: 'bold'}}>1-2-3</ThemedText></ThemedText>
           <ThemedView style={styles.stepContainer}>
             <ThemedText type="subtitle">(1) Take some Pictures</ThemedText>
           </ThemedView> 

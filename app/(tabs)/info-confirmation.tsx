@@ -22,16 +22,16 @@ export default function InfoConfirmationScreen() {
       />
     </TouchableOpacity>
 
-      <ThemedText><b>Here's what we've learned about you!</b></ThemedText>
+      <ThemedText style={{fontWeight: 'bold'}}>Here's what we've learned about you!</ThemedText>
 
       <ThemedText>Is this correct?</ThemedText>
 
       <ThemedText>
-        <p>Your name &rarr; <b>{name}</b></p>
-        <p>You are <b>{age} years old </b> </p> 
-        <p>Your current routine &rarr; <b>{routine}</b></p> 
-        <p>Your skincare goal &rarr; <b>{goal}</b></p>
-        <p>Here are the awesome pictures we got of you!</p>
+        <ThemedText>Your name &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{name}</ThemedText></ThemedText>
+        <ThemedText>You are <ThemedText style={{ fontWeight: 'bold' }}>{age} years old</ThemedText></ThemedText>
+        <ThemedText>Your current routine &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{routine}</ThemedText></ThemedText>
+        <ThemedText>Your skincare goal &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{goal}</ThemedText></ThemedText>
+        <ThemedText>Here are the awesome pictures we got of you!</ThemedText>
       </ThemedText>
 
       <View style={{ width: 300, height: 300 }}>

@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, Text, TextInput, Image,
-    StyleSheet, ActivityIndicator, TouchableOpacity, Modal } from 'react-native';
+    StyleSheet, ActivityIndicator, TouchableOpacity, Modal, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
@@ -22,14 +22,13 @@ export default function RoutineAnalysis() {
       return (
         <ThemedView style={styles.container}>
 
-          <ThemedText style={{ fontWeight: 'bold' }}> Hey { name }! Here's a routine to get started with!</ThemedText>
-          <ThemedText>
+          <ThemedText style={styles.defaultText}> Hey { name }! Here's a routine to get started with!</ThemedText>
+          <ThemedText style={styles.defaultText}>
               Use a gentle, hydrating cleanser to remove impurities and prepare your skin for the day.
           </ThemedText>
-          <ThemedText>
+          <ThemedText style={styles.defaultText}>
               Example Products: Cetaphil Daily Facial Cleanser or CeraVe Hydrating Cleanser.  
           </ThemedText>
-
         </ThemedView>
       )
     }
@@ -37,11 +36,11 @@ export default function RoutineAnalysis() {
     function displaySkinCareAnalysis() {
       return(
         <ThemedView style={styles.container}>
-          <ThemedText style={{ fontWeight: 'bold' }}>{name}! Here's your skin analysis</ThemedText>
-          <ThemedText>
+          <ThemedText style={styles.defaultText}>{name}! Here's your skin analysis</ThemedText>
+          <ThemedText style={styles.defaultText}>
               Skin texture appears smooth and well-maintained, indicating good hydration levels.
           </ThemedText>
-          <ThemedText>
+          <ThemedText style={styles.defaultText}>
               The skin shows minimal signs of dryness or flakiness, suggesting that regular moisturizing.  
           </ThemedText>
         </ThemedView>
@@ -58,7 +57,7 @@ export default function RoutineAnalysis() {
       return (
           <ThemedView style={styles.loadingContainer}>
               <ActivityIndicator size="large" color="#E57BFF" />
-              <ThemedText style={styles.loadingText}>Loading...</ThemedText>
+              <ThemedText style={styles.defaultText}>Loading...</ThemedText>
           </ThemedView>
       );
     }
@@ -66,8 +65,9 @@ export default function RoutineAnalysis() {
 
 
     return (
-        <ThemedView style={styles.container}>
 
+      <ScrollView>
+        <ThemedView style={styles.container}>
           <TouchableOpacity
               onPress={() => router.push('/')}
           >
@@ -82,29 +82,28 @@ export default function RoutineAnalysis() {
                     <Pressable onPress={() => toggleAnalysisOrRoutine('routine')}
                         style={styles.selectedButton}
                     >
-                      <ThemedText>Routine</ThemedText>
+                      <ThemedText style={styles.defaultText}>Routine</ThemedText>
                     </Pressable>
                     : 
                     <Pressable onPress={() => toggleAnalysisOrRoutine('routine')}
                     style={styles.unselectedButton}
                     >
-                      <ThemedText>Routine</ThemedText>
+                      <ThemedText style={styles.defaultText}>Routine</ThemedText>
                     </Pressable>
                    }
               </ThemedView>
-              <ThemedView>
                         { infoType === 'analysis' ? 
 
                         <Pressable onPress={() => toggleAnalysisOrRoutine('analysis')}
                             style={styles.selectedButton}
                         >
-                          <ThemedText>Analysis</ThemedText>
+                          <ThemedText style={styles.defaultText}>Analysis</ThemedText>
                         </Pressable>
                         : 
                         <Pressable onPress={() => toggleAnalysisOrRoutine('analysis')}
                         style={styles.unselectedButton}
                         >
-                          <ThemedText>Analysis</ThemedText>
+                          <ThemedText style={styles.defaultText}>Analysis</ThemedText>
                         </Pressable>
                         }
               </ThemedView>
@@ -138,9 +137,9 @@ export default function RoutineAnalysis() {
                   >
                     <ThemedView style={styles.modalBackground}>
                         <ThemedView style={styles.modalContent}>
-                            <ThemedText style={styles.modalTitle}>Unlock the Best Skincare Knowledge by making a Free Skin Glow Account!</ThemedText>
+                            <ThemedText style={styles.defaultText}>Unlock the Best Skincare Knowledge by making a Free Skin Glow Account!</ThemedText>
                             
-                            <ThemedText style={styles.inputLabel}>Username</ThemedText>
+                            <ThemedText style={styles.defaultText}>Username</ThemedText>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={setUsername}
@@ -149,7 +148,7 @@ export default function RoutineAnalysis() {
                                 placeholderTextColor="#999"
                             />
                             
-                            <ThemedText style={styles.inputLabel}>Password</ThemedText>
+                            <ThemedText style={styles.defaultText}>Password</ThemedText>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={setPassword}
@@ -164,7 +163,7 @@ export default function RoutineAnalysis() {
                                     style={styles.buttonCancel}
                                     onPress={() => setModalVisible(false)}
                                 >
-                                    <ThemedText>Cancel</ThemedText>
+                                    <ThemedText style={styles.defaultText}>Cancel</ThemedText>
                                 </TouchableOpacity>
                                 
                                 <TouchableOpacity 
@@ -175,15 +174,14 @@ export default function RoutineAnalysis() {
                                         setModalVisible(false);
                                     }}
                                 >
-                                    <ThemedText>Submit</ThemedText>
+                                    <ThemedText style={styles.defaultText}>Submit</ThemedText>
                                 </TouchableOpacity>
                             </ThemedView>
                         </ThemedView>
                     </ThemedView>
-                  </Modal>
-            </ThemedView>
-
+                  </Modal>          
         </ThemedView>
+      </ScrollView>
     );
 }
 
@@ -223,16 +221,13 @@ const styles = StyleSheet.create({
   callToAction: {
     marginTop: 10,
   },
-//   columnContainer: {
-//     flex: 0.2,
-//     marginHorizontal: 5,
-//     backgroundColor: '#E57BFF',
-//     alignItems: 'center',
-// },
-  loadingText: {
-      marginTop: 10,
-      fontSize: 16,
-  }, 
+  defaultText: {
+    color: 'black',
+  },
+  // loadingText: {
+  //     marginTop: 10,
+  //     fontSize: 16,
+  // },
   selectedButton: {
     padding: 10,
     width: 50,
@@ -285,6 +280,10 @@ modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
+},
+modalText: {
+    // alignSelf: 'flex-start', 
+    color: 'black'
 },
 inputLabel: {
     alignSelf: 'flex-start',

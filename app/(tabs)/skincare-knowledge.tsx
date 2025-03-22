@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
@@ -12,11 +12,13 @@ export default function SkincareKnowledgeScreen() {
   
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const knowledgeOptions = ['I know nothing.', 'I am a novice. ', 'I am an expert!'];
+  const skinTypes = ['dry', 'oily', 'combo'];
   const [userSCRoutine, setSCRoutine] = useState('');
   const [skinImprovementGoal, setSkinImprovementGoal] = useState('');
 
 
   return (
+    <ScrollView>
     <ThemedView style={styles.container}>
 
     <TouchableOpacity
@@ -28,6 +30,7 @@ export default function SkincareKnowledgeScreen() {
     </TouchableOpacity>
      
       <ThemedText style={styles.defaultText}>We want to Know more About You!</ThemedText>
+    
       <ThemedText style={styles.defaultText}>How much do you Know about Skincare?</ThemedText>
       <ThemedView style={styles.optionsRow}>
           {knowledgeOptions.map((option) => (
@@ -38,7 +41,7 @@ export default function SkincareKnowledgeScreen() {
                       selectedOption === option && styles.selectedOption
                   ]}
                   onPress={() => setSelectedOption(option)}
-              >
+              > 
                   <ThemedText style={[
                       styles.optionText,
                       styles.defaultText,
@@ -50,7 +53,29 @@ export default function SkincareKnowledgeScreen() {
           ))}
       </ThemedView>
 
-        <ThemedText style={styles.defaultText}>What is your current Skincare Routine if you have one?</ThemedText>
+      <ThemedText style={styles.defaultText}>What type of Skin do You have?</ThemedText>
+      <ThemedView style={styles.optionsRow}>
+          {skinTypes.map((option) => (
+              <TouchableOpacity
+                  key={option}
+                  style={[
+                      styles.optionButton,
+                      selectedOption === option && styles.selectedOption
+                  ]}
+                  onPress={() => setSelectedOption(option)}
+              > 
+                  <ThemedText style={[
+                      styles.optionText,
+                      styles.defaultText,
+                      selectedOption === option && styles.selectedOptionText
+                  ]}>
+                      {option}
+                  </ThemedText>
+              </TouchableOpacity>
+          ))}
+      </ThemedView>
+
+        {/* <ThemedText style={styles.defaultText}>What type of skin do you have?</ThemedText>
         <TextInput
         style={styles.input}
         onChangeText={setSCRoutine}
@@ -60,7 +85,7 @@ export default function SkincareKnowledgeScreen() {
         // Optional props:
         autoCorrect={false}
         autoCapitalize="none"
-      /> 
+      />  */}
 
     <ThemedText style={styles.defaultText}>How do you want to improve your skin?</ThemedText>
         <TextInput
@@ -95,6 +120,7 @@ export default function SkincareKnowledgeScreen() {
            <ThemedText style={styles.defaultText}>&rarr;</ThemedText> 
       </TouchableOpacity>
     </ThemedView>
+  </ScrollView>
   );
 }
 
@@ -156,5 +182,8 @@ const styles = StyleSheet.create({
   },
   selectedOptionText: {
     color: 'white',  // White text for better contrast on pink background
+  },
+  scrollContainer: {
+    flexGrow: 1, 
   }
 });

@@ -28,15 +28,14 @@ export default function InfoConfirmationScreen() {
 
       <ThemedText style={styles.defaultText}>Is this correct?</ThemedText>
 
-      <ThemedText>
-        <ThemedText style={styles.defaultText}>Your name &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{name}</ThemedText></ThemedText>
-        <ThemedText style={styles.defaultText}>You are <ThemedText style={{ fontWeight: 'bold' }}>{age} years old</ThemedText></ThemedText>
-        <ThemedText style={styles.defaultText}>Your current routine &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{routine}</ThemedText></ThemedText>
-        <ThemedText style={styles.defaultText}>Your skincare goal &rarr; <ThemedText style={{ fontWeight: 'bold' }}>{goal}</ThemedText></ThemedText>
+        <ThemedText style={styles.defaultText}>Your name &rarr; {name}</ThemedText>
+        <ThemedText style={styles.defaultText}>You are {age} years old</ThemedText>
+        <ThemedText style={styles.defaultText}>Your current routine &rarr; {routine}</ThemedText>
+        <ThemedText style={styles.defaultText}>Your skincare goal &rarr; {goal}</ThemedText>
         <ThemedText style={styles.defaultText}>Here are the awesome pictures we got of you!</ThemedText>
-      </ThemedText>
+  
 
-      <View style={{ width: 300, height: 300 }}>
+      <View style={{ width: 150, height: 150 }}>
           <Image
               source={{uri: typeof image === 'string' ? image : Array.isArray(image) ? image[0] : ''}}
               resizeMode="contain"
@@ -44,7 +43,7 @@ export default function InfoConfirmationScreen() {
           />
       </View>
 
-      <View style={{ width: 300, height: 300 }}>
+      <View style={{ width: 150, height: 150 }}>
           <Image
               source={{uri: typeof image2 === 'string' ? image2 : Array.isArray(image2) ? image2[0] : ''}}
               resizeMode="contain"

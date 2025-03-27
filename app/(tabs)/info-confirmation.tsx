@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function InfoConfirmationScreen() {
 
   const params = useLocalSearchParams();
-  const { name, age, routine, goal, image, image2 } = params;
+  const { name, age, routine, goal, image, image2, skinType } = params;
   
   console.log("Image URI received:", image); // Add this to debug
 
@@ -28,11 +28,11 @@ export default function InfoConfirmationScreen() {
 
       <ThemedText style={styles.defaultText}>Is this correct?</ThemedText>
 
-        <ThemedText style={styles.defaultText}>Your name &rarr; {name}</ThemedText>
+        <ThemedText style={styles.defaultText}>You are {name}!</ThemedText>
         <ThemedText style={styles.defaultText}>You are {age} years old</ThemedText>
-        <ThemedText style={styles.defaultText}>Your current routine &rarr; {routine}</ThemedText>
+        <ThemedText style={styles.defaultText}>Your skin type is {skinType}</ThemedText>
         <ThemedText style={styles.defaultText}>Your skincare goal &rarr; {goal}</ThemedText>
-        <ThemedText style={styles.defaultText}>Here are the awesome pictures we got of you!</ThemedText>
+        <ThemedText style={styles.defaultText}>Here are the amazing pictures we got of you!</ThemedText>
   
       <ThemedView
         style={styles.rowContainer}
@@ -60,7 +60,6 @@ export default function InfoConfirmationScreen() {
         <ThemedView
           style={styles.columnContainerNav}
         >
-
             <TouchableOpacity onPress={() => router.push('/take-pics') }
                 style={styles.nextButton}
               >
@@ -68,7 +67,7 @@ export default function InfoConfirmationScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={styles.nextButton  } 
+                style={styles.nextButton} 
                         onPress={() => router.push({
                           pathname: '/routine-analysis',
                           params: {
@@ -81,9 +80,6 @@ export default function InfoConfirmationScreen() {
             </TouchableOpacity>
           
         </ThemedView>
-        
-
-
       </ThemedView>
 
     </ThemedView>

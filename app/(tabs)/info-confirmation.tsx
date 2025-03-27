@@ -13,7 +13,7 @@ export default function InfoConfirmationScreen() {
 
   return (
   
-  <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <ThemedView style={styles.container}>
 
     <TouchableOpacity
@@ -34,37 +34,58 @@ export default function InfoConfirmationScreen() {
         <ThemedText style={styles.defaultText}>Your skincare goal &rarr; {goal}</ThemedText>
         <ThemedText style={styles.defaultText}>Here are the awesome pictures we got of you!</ThemedText>
   
-
-      <View style={{ width: 150, height: 150 }}>
-          <Image
-              source={{uri: typeof image === 'string' ? image : Array.isArray(image) ? image[0] : ''}}
-              resizeMode="contain"
-              style={{ width: '100%', height: '100%' }}
-          />
-      </View>
-
-      <View style={{ width: 150, height: 150 }}>
-          <Image
-              source={{uri: typeof image2 === 'string' ? image2 : Array.isArray(image2) ? image2[0] : ''}}
-              resizeMode="contain"
-              style={{ width: '100%', height: '100%' }}
-          />
-      </View>
-
-      <TouchableOpacity onPress={() => router.push('/') }>
-           <ThemedText style={styles.defaultText}>No</ThemedText> 
-      </TouchableOpacity>
-
-      <TouchableOpacity 
-                  onPress={() => router.push({
-                    pathname: '/routine-analysis',
-                    params: {
-                       name: name,
-                            }
-                          })}
+      <ThemedView
+        style={styles.rowContainer}
+      >
+        <ThemedView
+          style={styles.columnContainerNav}
         >
-           <ThemedText style={styles.defaultText}>Yes!</ThemedText> 
-      </TouchableOpacity>
+          <View style={{ width: 150, height: 150 }}>
+              <Image
+                  source={{uri: typeof image === 'string' ? image : Array.isArray(image) ? image[0] : ''}}
+                  resizeMode="contain"
+                  style={{ width: '100%', height: '100%' }}
+              />
+          </View>
+
+          <View style={{ width: 150, height: 150 }}>
+              <Image
+                  source={{uri: typeof image2 === 'string' ? image2 : Array.isArray(image2) ? image2[0] : ''}}
+                  resizeMode="contain"
+                  style={{ width: '100%', height: '100%' }}
+              />
+          </View>
+        </ThemedView>
+
+        <ThemedView
+          style={styles.columnContainerNav}
+        >
+
+            <TouchableOpacity onPress={() => router.push('/take-pics') }
+                style={styles.nextButton}
+              >
+                <ThemedText style={styles.defaultText}>No</ThemedText> 
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.nextButton  } 
+                        onPress={() => router.push({
+                          pathname: '/routine-analysis',
+                          params: {
+                            name: name,
+                                  }
+                                })}
+              >
+                <ThemedText style={styles.defaultText}
+                >Yes!</ThemedText> 
+            </TouchableOpacity>
+          
+        </ThemedView>
+        
+
+
+      </ThemedView>
+
     </ThemedView>
   </ScrollView>
   );
@@ -111,5 +132,30 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     borderRadius: 10,
+},
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '15%',
+    paddingHorizontal: 10,
+    backgroundColor: '#EFE0F2',
+  },
+  columnContainer: {
+    flex: 0.4,
+    marginHorizontal: 5,
+    backgroundColor: '#E57BFF',
+    alignItems: 'center',
+},
+columnContainerNav: {
+  flex: 0.4,
+  marginHorizontal: 5,
+  backgroundColor: '#EFE0F2',
+  alignItems: 'center',
+},
+nextButton:{
+  backgroundColor: 'white',
+  padding: 15,
+  borderRadius: 50,
+  marginVertical: 20,
 },
 });

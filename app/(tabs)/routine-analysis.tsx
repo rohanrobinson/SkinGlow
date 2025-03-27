@@ -121,7 +121,7 @@ export default function RoutineAnalysis() {
             
           </ThemedView>
 
-              <ThemedView style={styles.callToAction}>
+              <ThemedView style={styles.container}>
                   <TouchableOpacity
                     style={styles.button}
                     onPress={() => setModalVisible(true)}
@@ -170,7 +170,7 @@ export default function RoutineAnalysis() {
                                     style={styles.buttonSubmit}
                                     onPress={() => {
                                         // Handle login logic here
-                                        console.log(`thanks ${name} skinglow is ready to assist with all your skincare needs`);
+                                        console.log(`Thanks ${name} skin-glow is ready to assist with all your skincare needs`);
                                         setModalVisible(false);
                                     }}
                                 >

@@ -8,66 +8,67 @@ export default function SkincareKnowledgeScreen() {
   
   const params = useLocalSearchParams();
   const { name, age, image, image2 } = params;
-
   
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedSkinOption, setSkinType] = useState<string | null>(null);
   const knowledgeOptions = ['I know nothing.', 'I am a novice. ', 'I am an expert!'];
-  const skinTypes = ['dry', 'oily', 'combo'];
+  const skinTypes = ['normal','dry', 'oily', 'combo'];
   const [userSCRoutine, setSCRoutine] = useState('');
   const [skinImprovementGoal, setSkinImprovementGoal] = useState('');
 
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle ={styles.scrollContainer}>
     <ThemedView style={styles.container}>
 
-    <TouchableOpacity
-     onPress={() => router.push('/')}
-    >
-      <Image 
-        source={require('@/assets/images/skinglow-logo.png')} 
-      />
-    </TouchableOpacity>
+      <TouchableOpacity
+      onPress={() => router.push('/')}
+      >
+        <Image 
+          source={require('@/assets/images/skinglow-logo.png')} 
+        />
+      </TouchableOpacity>
      
-      <ThemedText style={styles.defaultText}>We want to Know more About You!</ThemedText>
-    
-      <ThemedText style={styles.defaultText}>How much do you Know about Skincare?</ThemedText>
-      <ThemedView style={styles.optionsRow}>
-          {knowledgeOptions.map((option) => (
-              <TouchableOpacity
-                  key={option}
-                  style={[
-                      styles.optionButton,
-                      selectedOption === option && styles.selectedOption
-                  ]}
-                  onPress={() => setSelectedOption(option)}
-              > 
-                  <ThemedText style={[
-                      styles.optionText,
-                      styles.defaultText,
-                      selectedOption === option && styles.selectedOptionText
-                  ]}>
-                      {option}
-                  </ThemedText>
-              </TouchableOpacity>
-          ))}
-      </ThemedView>
+        <ThemedText style={styles.defaultText}>We want to Know more About You!</ThemedText> 
+       
+        <ThemedText style={styles.defaultText}>How much do you Know about Skincare?</ThemedText>
+        <ThemedView style={styles.optionsRow}>
+            {knowledgeOptions.map((option) => (
+                <TouchableOpacity
+                    key={option}
+                    style={[
+                        styles.optionButton,
+                        selectedOption === option && styles.selectedOption
+                    ]}
+                    onPress={() => setSelectedOption(option)}
+                > 
+                    <ThemedText style={[
+                        styles.optionText,
+                        styles.defaultText,
+                        selectedOption === option && styles.selectedOptionText
+                    ]}>
+                        {option}
+                    </ThemedText>
+                </TouchableOpacity>
+            ))}
+        </ThemedView>
 
-      <ThemedText style={styles.defaultText}>What type of Skin do You have?</ThemedText>
+      <ThemedText style={styles.defaultText}>What Type of Skin Do You Have?</ThemedText>
       <ThemedView style={styles.optionsRow}>
           {skinTypes.map((option) => (
               <TouchableOpacity
                   key={option}
                   style={[
                       styles.optionButton,
-                      selectedOption === option && styles.selectedOption
+                      selectedSkinOption === option && styles.selectedOption
                   ]}
-                  onPress={() => setSelectedOption(option)}
+                  // style={styles.skinOption}
+                  onPress={() => setSkinType(option)}
               > 
                   <ThemedText style={[
                       styles.optionText,
                       styles.defaultText,
-                      selectedOption === option && styles.selectedOptionText
+                      {color: selectedSkinOption === option ? 'white' : undefined}
                   ]}>
                       {option}
                   </ThemedText>
@@ -75,17 +76,7 @@ export default function SkincareKnowledgeScreen() {
           ))}
       </ThemedView>
 
-        {/* <ThemedText style={styles.defaultText}>What type of skin do you have?</ThemedText>
-        <TextInput
-        style={styles.input}
-        onChangeText={setSCRoutine}
-        value={userSCRoutine}
-        placeholder="What do you put on yourself"
-        placeholderTextColor="#666"
-        // Optional props:
-        autoCorrect={false}
-        autoCapitalize="none"
-      />  */}
+
 
     <ThemedText style={styles.defaultText}>How do you want to improve your skin?</ThemedText>
         <TextInput
@@ -129,6 +120,10 @@ const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: '#EFE0F2',
     alignItems: 'center', 
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    backgroundColor: '#EFE0F2',
   },
   input: {
     width: '25%',
@@ -183,7 +178,7 @@ const styles = StyleSheet.create({
   selectedOptionText: {
     color: 'white',  // White text for better contrast on pink background
   },
-  scrollContainer: {
-    flexGrow: 1, 
-  }
+  selectedSkinTypeText: {
+    color: 'white', 
+  },
 });

@@ -67,7 +67,7 @@ export default function TakePics() {
     
 
     return (    
-      <ScrollView>
+      <ScrollView style={styles.scrollContainer}>
         <ThemedView style={styles.container}>
 
             <Image 
@@ -182,9 +182,38 @@ export default function TakePics() {
               <ThemedText style={styles.defaultText}>Next</ThemedText>
             </TouchableOpacity>
               :
-              <ThemedView style={styles.container}>
-                    <ThemedText style={styles.defaultText }> Tap the camera icons!</ThemedText>   
+
+              <ThemedView style={styles.rowContainer}>
+                  <TouchableOpacity
+
+                  style={styles.nextButton}
+
+                  onPress= {
+                    () => router.push({
+                      pathname: '/',
+                  })
+                  }
+                  >
+                    <ThemedText style={styles.defaultText}>Back</ThemedText>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+
+                      style={styles.nextButton}
+
+                      onPress= {
+                        () => router.push({
+                          pathname: '/user-info',
+                      })
+                      }
+                      >
+                        <ThemedText style={styles.defaultText}>Skip</ThemedText>
+                      </TouchableOpacity>
               </ThemedView>
+
+              // <ThemedView style={styles.container}>
+              //       <ThemedText style={styles.defaultText }> Tap the camera icons!</ThemedText>   
+              // </ThemedView>
             }
 
         </ThemedView>
@@ -200,11 +229,13 @@ const styles = StyleSheet.create({
       backgroundColor: '#EFE0F2',
       alignItems: 'center', 
     },
+    
     defaultText: {
       color: 'black'
     },
     scrollContainer: {
        flexGrow: 1,
+       backgroundColor: '#EFE0F2',
     },
     titleContainer: {
       flexDirection: 'row',

@@ -1,4 +1,4 @@
-# This is Skin Glow. 🦢 A tool to make skincare effortless and stress-free!
+# This is Skin Glow. 🦢 No more stress and confusion with your skincare!
 # Created as an Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).

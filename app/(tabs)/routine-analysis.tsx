@@ -17,7 +17,6 @@ export default function RoutineAnalysis() {
     const [password, setPassword] = useState('');
 
 
-
     function displaySkinCareRoutine() {
       return (
         <ThemedView style={styles.container}>
@@ -66,17 +65,18 @@ export default function RoutineAnalysis() {
 
     return (
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ThemedView style={styles.container}>
           <TouchableOpacity
-              onPress={() => router.push('/')}
+              style={styles.logoFun}
           >
                 <Image 
                   source={require('@/assets/images/skinglow-logo.png')} 
                 />
           </TouchableOpacity>
 
-          <ThemedView style={styles.buttonContainer}>
+          <ThemedView style={styles.rowContainer}>
+
               <ThemedView>
                     { infoType === 'routine' ? 
                     <Pressable onPress={() => toggleAnalysisOrRoutine('routine')}
@@ -92,6 +92,7 @@ export default function RoutineAnalysis() {
                     </Pressable>
                    }
               </ThemedView>
+              <ThemedView>
                         { infoType === 'analysis' ? 
 
                         <Pressable onPress={() => toggleAnalysisOrRoutine('analysis')}
@@ -121,7 +122,7 @@ export default function RoutineAnalysis() {
             
           </ThemedView>
 
-              <ThemedView style={styles.container}>
+        <ThemedView style={styles.container}>
                   <TouchableOpacity
                     style={styles.button}
                     onPress={() => setModalVisible(true)}
@@ -130,7 +131,7 @@ export default function RoutineAnalysis() {
                   </TouchableOpacity>
                 
                 <Modal
-                      animationType="slide"
+                      animationType="fade"
                       transparent={true}
                       visible={modalVisible}
                       onRequestClose={() => setModalVisible(false)}
@@ -181,6 +182,7 @@ export default function RoutineAnalysis() {
                     </ThemedView>
                   </Modal>          
         </ThemedView>
+      </ThemedView>
       </ScrollView>
     );
 }
@@ -191,6 +193,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#EFE0F2',
       alignItems: 'center', 
     },
+    scrollContainer: {
+      flexGrow: 1,
+    }, 
     button: {
       height: 60,
       width: 200,
@@ -208,7 +213,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
+    width: '6%',
     paddingHorizontal: 10,
     backgroundColor: '#EFE0F2',
   },
@@ -230,14 +235,14 @@ const styles = StyleSheet.create({
   // },
   selectedButton: {
     padding: 10,
-    width: 50,
+    width: 60,
     alignItems: 'center',
     backgroundColor: '#E57BFF',
     borderRadius: 5,
   },
   unselectedButton: {
     padding: 10,
-    width: 50,
+    width: 60,
     alignItems: 'center',
     backgroundColor: '#EFE0F2',
     borderRadius: 5,
@@ -255,6 +260,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 20,
 },
+logoFun: {
+  marginTop: 30,
+},
 modalBackground: {
     flex: 1,
     justifyContent: 'center',
@@ -262,7 +270,7 @@ modalBackground: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
 },
 modalContent: {
-    width: '80%',
+    width: '60%',
     backgroundColor: '#EFE0F2',
     borderRadius: 20,
     padding: 20,
@@ -290,7 +298,7 @@ inputLabel: {
     marginBottom: 5,
 },
 input: {
-    width: '100%',
+    width: '60%',
     height: 50,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -300,8 +308,9 @@ input: {
 buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
+    width: '60%',
     marginTop: 10,
+    backgroundColor: '#EFE0F2',
 },
 buttonCancel: {
     backgroundColor: '#ccc',

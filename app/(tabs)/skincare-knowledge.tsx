@@ -103,6 +103,7 @@ export default function SkincareKnowledgeScreen() {
             routine: userSCRoutine,
             goal: skinImprovementGoal,
             knowledgeLevel: selectedOption, 
+            skinType: selectedSkinOption,
             image: image,
             image2: image2,
           }

@@ -7,9 +7,8 @@ import { useState } from 'react';
 export default function InfoConfirmationScreen() {
 
   const params = useLocalSearchParams();
-  const { name, age, routine, goal, image, image2, skinType } = params;
+  const { name, age, routine, goal, skinType } = params;
   
-  console.log("Image URI received:", image); // Add this to debug
 
   return (
   
@@ -28,16 +27,16 @@ export default function InfoConfirmationScreen() {
 
       <ThemedText style={styles.defaultText}>Is this correct?</ThemedText>
 
-        <ThemedText style={styles.defaultText}>You are {name}!</ThemedText>
-        <ThemedText style={styles.defaultText}>You are {age} years old</ThemedText>
-        <ThemedText style={styles.defaultText}>Your skin type is {skinType}</ThemedText>
-        <ThemedText style={styles.defaultText}>Your skincare goal &rarr; {goal}</ThemedText>
-        <ThemedText style={styles.defaultText}>Here are the amazing pictures we got of you!</ThemedText>
+        <ThemedText style={styles.userInfoText}>You are {name}!</ThemedText>
+        <ThemedText style={styles.userInfoText}>You are {age} years old</ThemedText>
+        <ThemedText style={styles.userInfoText}>Your skin type is {skinType}</ThemedText>
+        <ThemedText style={styles.userInfoText}>Your skincare goal &rarr; {goal}</ThemedText>
+        {/* <ThemedText style={styles.defaultText}>Here are the amazing pictures we got of you!</ThemedText> */}
   
       <ThemedView
         style={styles.rowContainer}
       >
-        <ThemedView
+        {/* <ThemedView
           style={styles.columnContainerNav}
         >
           <View style={{ width: 150, height: 150 }}>
@@ -55,19 +54,19 @@ export default function InfoConfirmationScreen() {
                   style={{ width: '100%', height: '100%' }}
               />
           </View>
-        </ThemedView>
+        </ThemedView> */}
 
         <ThemedView
           style={styles.columnContainerNav}
         >
             <TouchableOpacity onPress={() => router.push('/take-pics') }
-                style={styles.nextButton}
+                style={styles.noButton}
               >
                 <ThemedText style={styles.defaultText}>No</ThemedText> 
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={styles.nextButton} 
+                style={styles.yesButton} 
                         onPress={() => router.push({
                           pathname: '/routine-analysis',
                           params: {
@@ -76,7 +75,7 @@ export default function InfoConfirmationScreen() {
                                 })}
               >
                 <ThemedText style={styles.defaultText}
-                >Yes!</ThemedText> 
+                >Yes</ThemedText> 
             </TouchableOpacity>
           
         </ThemedView>
@@ -109,6 +108,10 @@ const styles = StyleSheet.create({
   },
   defaultText: {
     color: 'black'
+  },
+  userInfoText: {
+    color: 'black',
+    marginTop: 15
   },
   buttonText: {
     color: 'black',
@@ -154,4 +157,21 @@ nextButton:{
   borderRadius: 50,
   marginVertical: 20,
 },
+
+yesButton:{
+  backgroundColor: 'lightgreen',
+  padding: 15,
+  borderRadius: 50,
+  marginVertical: 20,
+},
+
+noButton:{
+  backgroundColor: 'lightpink',
+  padding: 15,
+  borderRadius: 50,
+  marginVertical: 20,
+},
+
+
+
 });

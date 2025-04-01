@@ -3,6 +3,23 @@ import { Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
+// import { auth, db } from '../../firebaseConfigfirebase';
+// import { signInWithEmailAndPassword } from 'firebase/auth';
+// import { collection, getDocs } from 'firebase/firestore';
+
+// Example auth usage
+// function login(email, password) {
+//   return signInWithEmailAndPassword(auth, email, password);
+// }
+
+// Example Firestore usage
+// async function getUsers() {
+//   const usersCollection = collection(db, 'users');
+//   const usersSnapshot = await getDocs(usersCollection);
+//   return usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+// }
+
+
 export default function HomeScreen() {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -23,7 +40,7 @@ export default function HomeScreen() {
           </ThemedView>  
           <TouchableOpacity
             style={styles.button}
-            onPress={() => router.push('/take-pics') }
+            onPress={() => router.push('/user-info') }
           >
            <ThemedText style={styles.buttonText}>Start</ThemedText>
           </TouchableOpacity>

@@ -175,7 +175,7 @@ export default function RoutineAnalysis() {
                                         setModalVisible(false);
                                     }}
                                 >
-                                    <ThemedText style={styles.defaultText}>Submit</ThemedText>
+                                    <ThemedText style={styles.defaultText}>Sign Up</ThemedText>
                                 </TouchableOpacity>
                             </ThemedView>
                         </ThemedView>

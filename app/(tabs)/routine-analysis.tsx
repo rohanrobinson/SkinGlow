@@ -5,16 +5,34 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
 
+import { 
+  collection, 
+  doc, 
+  setDoc, 
+  addDoc, 
+  getDoc, 
+  getDocs, 
+  updateDoc, 
+  deleteDoc, 
+  query, 
+  where, 
+  orderBy 
+} from 'firebase/firestore';
+import { serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase';
+
+
 export default function RoutineAnalysis() {
 
     const params = useLocalSearchParams();
-    const { name, age, routine, goal } = params;
+    const { name, age, skinGoal, skinType, knowledgeLevel } = params;
     const [infoType, toggleAnalysisOrRoutine] = useState('analysis');
     const [isLoading, setIsLoading] = useState(true);
 
+    const [userList, getExistingUsers] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('default-username');
+    const [password, setPassword] = useState('default***password');
 
 
     function displaySkinCareRoutine() {
@@ -46,11 +64,73 @@ export default function RoutineAnalysis() {
       )
     }
 
+
+  // Get all users
+  const fetchUsers = async () => {
+    try {
+      const usersRef = collection(db, 'users');
+      const querySnapshot = await getDocs(usersRef);
+      
+      querySnapshot.forEach((doc) => {
+        console.log({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+
+      // setMessage(`Fetched ${userList.length} users`);
+    } catch (error) {
+      postMessage(`Error fetching users: ${error}`);
+    }
+  };
+
+  // Add new user to database
+  const addUser = async (userData: any) => {
+    try {
+      const usersRef = collection(db, 'users');
+
+      try {
+        const newUserDoc = await addDoc(usersRef, userData);
+        console.log("4. Document successfully added:", newUserDoc.id);
+        return newUserDoc;
+    } catch (addDocError: any) {
+        console.error("5. Error in addDoc specifically:", addDocError);
+        console.error("5a. Error details:", {
+            code: addDocError.code,
+            message: addDocError.message,
+            stack: addDocError.stack
+        });
+        throw addDocError;
+    }
+
+    }
+    catch (error) {
+      postMessage(`Error adding user: ${error}`);
+    }
+  }
+
+    // this function sends user data to firebase
+    function makeUserObject() {
+        const userObject = {
+          createdAt: serverTimestamp(),
+          username: username,
+          skinProfile: {
+              skinType: skinType,
+              skinGoal: skinGoal,
+              age: age,
+              name: name, 
+              knowledgeLevel: knowledgeLevel,
+        }
+      };
+        return userObject;
+    }
+
     useEffect(() => {
       setTimeout(() => {
           setIsLoading(false);
       }, 1500); // 2000 milliseconds = 2 seconds
-    }, []);
+    }, [],
+  );
 
     if (isLoading) {
       return (
@@ -60,8 +140,6 @@ export default function RoutineAnalysis() {
           </ThemedView>
       );
     }
-
-
 
     return (
 
@@ -171,8 +249,9 @@ export default function RoutineAnalysis() {
                                     style={styles.buttonSubmit}
                                     onPress={() => {
                                         // Handle login logic here
-                                        console.log(`Thanks ${name} skin-glow is ready to assist with all your skincare needs`);
                                         setModalVisible(false);
+                                        const userData = makeUserObject();
+                                        addUser(userData);
                                     }}
                                 >
                                     <ThemedText style={styles.defaultText}>Sign Up</ThemedText>

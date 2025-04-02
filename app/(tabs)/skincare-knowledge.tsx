@@ -9,12 +9,12 @@ export default function SkincareKnowledgeScreen() {
   const params = useLocalSearchParams();
   const { name, age, image, image2 } = params;
   
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [knowledgeLevel, setKnowledgeOption] = useState<string | null>(null);
   const [selectedSkinOption, setSkinType] = useState<string | null>(null);
   const knowledgeOptions = ['I know nothing.', 'I am a novice. ', 'I am an expert!'];
   const skinTypes = ['normal','dry', 'oily', 'combo'];
   const [userSCRoutine, setSCRoutine] = useState('');
-  const [skinImprovementGoal, setSkinImprovementGoal] = useState('');
+  const [skinGoal, setSkinGoal] = useState('');
 
 
   return (
@@ -38,14 +38,14 @@ export default function SkincareKnowledgeScreen() {
                     key={option}
                     style={[
                         styles.optionButton,
-                        selectedOption === option && styles.selectedOption
+                        knowledgeLevel === option && styles.selectedOption
                     ]}
-                    onPress={() => setSelectedOption(option)}
+                    onPress={() => setKnowledgeOption(option)}
                 > 
                     <ThemedText style={[
                         styles.optionText,
                         styles.defaultText,
-                        selectedOption === option && styles.selectedOptionText
+                        knowledgeLevel === option && styles.selectedOptionText
                     ]}>
                         {option}
                     </ThemedText>
@@ -81,8 +81,8 @@ export default function SkincareKnowledgeScreen() {
     <ThemedText style={styles.defaultText}>How do you want to improve your skin?</ThemedText>
         <TextInput
         style={styles.input}
-        onChangeText={setSkinImprovementGoal}
-        value={skinImprovementGoal}
+        onChangeText={setSkinGoal}
+        value={skinGoal}
         placeholder="What are your skincare goals?"
         placeholderTextColor="#666"
         // Optional props:
@@ -101,8 +101,8 @@ export default function SkincareKnowledgeScreen() {
             name: name,
             age: age,
             routine: userSCRoutine,
-            goal: skinImprovementGoal,
-            knowledgeLevel: selectedOption, 
+            goal: skinGoal,
+            knowledgeLevel: knowledgeLevel, 
             skinType: selectedSkinOption,
             image: image,
             image2: image2,

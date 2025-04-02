@@ -7,7 +7,7 @@ import { useState } from 'react';
 export default function InfoConfirmationScreen() {
 
   const params = useLocalSearchParams();
-  const { name, age, routine, goal, skinType } = params;
+  const { name, age, routine, goal, skinType, knowledgeLevel } = params;
   
 
   return (
@@ -27,9 +27,10 @@ export default function InfoConfirmationScreen() {
 
       <ThemedText style={styles.defaultText}>Is this correct?</ThemedText>
 
-        <ThemedText style={styles.userInfoText}>You are {name}!</ThemedText>
+        <ThemedText style={styles.userInfoText}>Your beautiful name is {name}!</ThemedText>
         <ThemedText style={styles.userInfoText}>You are {age} years old</ThemedText>
         <ThemedText style={styles.userInfoText}>Your skin type is {skinType}</ThemedText>
+        <ThemedText style={styles.userInfoText}>Your skincare knowledge level is {knowledgeLevel}</ThemedText>
         <ThemedText style={styles.userInfoText}>Your skincare goal &rarr; {goal}</ThemedText>
         {/* <ThemedText style={styles.defaultText}>Here are the amazing pictures we got of you!</ThemedText> */}
   
@@ -71,6 +72,10 @@ export default function InfoConfirmationScreen() {
                           pathname: '/routine-analysis',
                           params: {
                             name: name,
+                            knowledgeLevel: knowledgeLevel,
+                            age: age,
+                            skinGoal: goal,
+                            skinType: skinType,
                                   }
                                 })}
               >

@@ -31,8 +31,8 @@ export default function RoutineAnalysis() {
 
     const [userList, getExistingUsers] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
-    const [username, setUsername] = useState('default-username');
-    const [password, setPassword] = useState('default***password');
+    const [username, setUsername] = useState('type username');
+    const [password, setPassword] = useState('type password');
 
 
     function displaySkinCareRoutine() {
@@ -91,17 +91,18 @@ export default function RoutineAnalysis() {
 
       try {
         const newUserDoc = await addDoc(usersRef, userData);
-        console.log("4. Document successfully added:", newUserDoc.id);
+        console.log("Document successfully added:", newUserDoc.id);
         return newUserDoc;
-    } catch (addDocError: any) {
-        console.error("5. Error in addDoc specifically:", addDocError);
-        console.error("5a. Error details:", {
-            code: addDocError.code,
-            message: addDocError.message,
-            stack: addDocError.stack
+      } 
+      
+      catch (error: any) {
+        console.error("Detailed error:", {
+            message: error.message,
+            code: error.code,
+            details: error
         });
-        throw addDocError;
-    }
+      throw error;
+    }         
 
     }
     catch (error) {
@@ -112,14 +113,14 @@ export default function RoutineAnalysis() {
     // this function sends user data to firebase
     function makeUserObject() {
         const userObject = {
+          username: username || '',
           createdAt: serverTimestamp(),
-          username: username,
           skinProfile: {
-              skinType: skinType,
-              skinGoal: skinGoal,
-              age: age,
-              name: name, 
-              knowledgeLevel: knowledgeLevel,
+              skinType: skinType || '',
+              skinGoal: skinGoal || '',
+              age: age || '',
+              name: name || '', 
+              knowledgeLevel: knowledgeLevel || '',
         }
       };
         return userObject;

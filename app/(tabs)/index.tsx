@@ -1,7 +1,12 @@
 import { router } from 'expo-router';
-import { Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+
+import { Image, Modal, TextInput, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+
+import { db } from '../../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 // import { auth, db } from '../../firebaseConfigfirebase';
 // import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -19,6 +24,37 @@ import { ThemedView } from '@/components/ThemedView';
 //   return usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 // }
 
+const checkIfUserInDb = async (usernameToCheck: string) => {
+  try {
+      console.log("Checking for username:", usernameToCheck);
+      
+      // Create a query against the users collection
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where("username", "==", usernameToCheck));
+      
+      // Execute the query
+      const querySnapshot = await getDocs(q);
+      
+      if (querySnapshot.empty) {
+          console.log("No matching user found");
+          return null;
+      }
+
+      // Get the first matching document
+      const userDoc = querySnapshot.docs[0];
+      console.log("Found matching user:", userDoc.id);
+      
+      // Return the document data and id
+      return {
+          id: userDoc.id,
+          ...userDoc.data()
+      };
+
+  } catch (error) {
+      console.error("Error checking user in database:", error);
+      throw error;
+  }
+};
 
 export default function HomeScreen() {
   return (

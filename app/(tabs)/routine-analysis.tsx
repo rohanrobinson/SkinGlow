@@ -148,6 +148,7 @@ export default function RoutineAnalysis() {
         <ThemedView style={styles.container}>
           <TouchableOpacity
               style={styles.logoFun}
+              onPress={() => router.push('/')}
           >
                 <Image 
                   source={require('@/assets/images/skinglow-logo.png')} 

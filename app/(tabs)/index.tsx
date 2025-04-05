@@ -36,7 +36,7 @@ export default function HomeScreen() {
             <ThemedText  style={styles.defaultText} type="subtitle">(1) Answer a Few Questions</ThemedText>
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
-            <ThemedText style={styles.defaultText}  type="subtitle"> (2) View your Personalized Routine</ThemedText>
+            <ThemedText style={styles.defaultText}  type="subtitle"> (2) View your Personalized Routine and Analysis</ThemedText>
           </ThemedView>  
           <TouchableOpacity
             style={styles.button}

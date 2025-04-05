@@ -28,10 +28,10 @@ export default function HomeScreen() {
               source={require('@/assets/images/skinglow-logo.png')} 
              />
             <ThemedText style={styles.defaultText} type="title" >Skin Glow</ThemedText>
-              <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 3 Easy Steps</ThemedText> 
-          <ThemedView style={styles.stepContainer}>
+              <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 2 Easy Steps</ThemedText> 
+          {/* <ThemedView style={styles.stepContainer}>
             <ThemedText  style={styles.defaultText} type="subtitle">(1) Take 2 Pictures</ThemedText>
-          </ThemedView> 
+          </ThemedView>  */}
            <ThemedView style={styles.stepContainer}>
             <ThemedText  style={styles.defaultText} type="subtitle">(2) Answer a Few Questions</ThemedText>
           </ThemedView> 

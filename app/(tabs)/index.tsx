@@ -1,28 +1,21 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
 
 import { Image, Modal, TextInput, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from './authContext';
+
+
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-
 import { db } from '../../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
-// import { auth, db } from '../../firebaseConfigfirebase';
-// import { signInWithEmailAndPassword } from 'firebase/auth';
-// import { collection, getDocs } from 'firebase/firestore';
-
-// Example auth usage
-// function login(email, password) {
-//   return signInWithEmailAndPassword(auth, email, password);
-// }
-
 // Example Firestore usage
-// async function getUsers() {
-//   const usersCollection = collection(db, 'users');
-//   const usersSnapshot = await getDocs(usersCollection);
-//   return usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-// }
+async function getUsers() {
+  const usersCollection = collection(db, 'users');
+  const usersSnapshot = await getDocs(usersCollection);
+  return usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}
 
 const checkIfUserInDb = async (usernameToCheck: string) => {
   try {
@@ -64,15 +57,15 @@ export default function HomeScreen() {
               source={require('@/assets/images/skinglow-logo.png')} 
              />
             <ThemedText style={styles.defaultText} type="title" >Skin Glow</ThemedText>
-              <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 3 Easy Steps</ThemedText> 
-          <ThemedView style={styles.stepContainer}>
+              <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 2 Easy Steps</ThemedText> 
+          {/* <ThemedView style={styles.stepContainer}>
             <ThemedText  style={styles.defaultText} type="subtitle">(1) Take 2 Pictures</ThemedText>
+          </ThemedView>  */}
+           <ThemedView style={styles.stepContainer}>
+            <ThemedText  style={styles.defaultText} type="subtitle">(1) Answer a Few Questions</ThemedText>
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
-            <ThemedText  style={styles.defaultText} type="subtitle">(2) Answer a Few Questions</ThemedText>
-          </ThemedView> 
-           <ThemedView style={styles.stepContainer}>
-            <ThemedText style={styles.defaultText}  type="subtitle"> (3) View your Personalized Routine</ThemedText>
+            <ThemedText style={styles.defaultText}  type="subtitle"> (2) View your Personalized Skincare Routine</ThemedText>
           </ThemedView>  
           <TouchableOpacity
             style={styles.button}

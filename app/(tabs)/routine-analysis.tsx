@@ -40,12 +40,9 @@ export default function RoutineAnalysis() {
         <ThemedView style={styles.container}>
 
           <ThemedText style={styles.defaultText}> Hey { name }! Here's a routine to get started with!</ThemedText>
-          <ThemedText style={styles.defaultText}>
-              Use a gentle, hydrating cleanser to remove impurities and prepare your skin for the day.
-          </ThemedText>
-          <ThemedText style={styles.defaultText}>
-              Example Products: Cetaphil Daily Facial Cleanser or CeraVe Hydrating Cleanser.  
-          </ThemedText>
+            <ThemedText style={styles.defaultText}>
+                  We're still working on the engine to generate a Routine for you! Check back here soon!
+            </ThemedText>
         </ThemedView>
       )
     }
@@ -55,11 +52,9 @@ export default function RoutineAnalysis() {
         <ThemedView style={styles.container}>
           <ThemedText style={styles.defaultText}>{name}! Here's your skin analysis</ThemedText>
           <ThemedText style={styles.defaultText}>
-              Skin texture appears smooth and well-maintained, indicating good hydration levels.
+                  We're still working on the engine to generate the analysis for you! Check back here soon!      
           </ThemedText>
-          <ThemedText style={styles.defaultText}>
-              The skin shows minimal signs of dryness or flakiness, suggesting that regular moisturizing.  
-          </ThemedText>
+
         </ThemedView>
       )
     }

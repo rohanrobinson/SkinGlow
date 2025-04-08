@@ -26,7 +26,7 @@ export default function UserInfoScreen() {
         source={require('@/assets/images/skinglow-logo.png')} 
       />
     </TouchableOpacity>
-      <ThemedText style={styles.defaultText}>Help Us Get to Know You!</ThemedText>
+      <ThemedText style={styles.defaultText}>Help Us Get to Know You! TEST</ThemedText>
 
       <ThemedText style={styles.defaultText}>Name</ThemedText>
       <TextInput
@@ -53,7 +53,7 @@ export default function UserInfoScreen() {
       />
 
       <TouchableOpacity
-            onPress={() => router.push('/user-info') }
+            onPress={() => router.push('/') }
       >
            <ThemedText style={styles.buttonText}>&larr;</ThemedText> 
 

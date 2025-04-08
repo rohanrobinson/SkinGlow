@@ -53,7 +53,7 @@ export default function UserInfoScreen() {
       />
 
       <TouchableOpacity
-            onPress={() => router.push('/user-info') }
+            onPress={() => router.push('/') }
       >
            <ThemedText style={styles.buttonText}>&larr;</ThemedText> 
 

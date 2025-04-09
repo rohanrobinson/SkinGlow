@@ -42,10 +42,7 @@ const checkIfUserInDb = async (usernameToCheck: string) => {
       console.log("Found matching user:", userDoc.id);
       
       // Return the document data and id
-      return {
-          id: userDoc.id,
-          ...userDoc.data()
-      };
+      return "success";
 
   } catch (error) {
       console.error("Error checking user in database:", error);
@@ -53,17 +50,29 @@ const checkIfUserInDb = async (usernameToCheck: string) => {
   }
 };
 
-const getUserProfile = async (usernameToCheck: string) => {
-      const userInfo = await checkIfUserInDb(usernameToCheck);
-      console.log(userInfo);
-}
-
-
 export default function HomeScreen() {
 
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const getUserProfile = async (usernameToCheck: string) => {
+    const message = await checkIfUserInDb(usernameToCheck);
+
+    if (message === "success" ) {
+      router.push({
+        pathname: '/profile',
+        params: {
+          username: username,
+        }
+      });
+    }
+
+    else {
+       console.log("there is an error");
+    }
+
+}
   
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>

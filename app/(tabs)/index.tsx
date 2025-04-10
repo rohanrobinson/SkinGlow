@@ -125,7 +125,7 @@ export default function HomeScreen() {
                                 placeholderTextColor="#999"
                             />
                             
-                            <ThemedText style={styles.defaultText}>Password</ThemedText>
+                            {/* <ThemedText style={styles.defaultText}>Password</ThemedText>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={setPassword}
@@ -133,16 +133,9 @@ export default function HomeScreen() {
                                 secureTextEntry={true}
                                 placeholder="Enter your password"
                                 placeholderTextColor="#999"
-                            />
+                            /> */}
                             
                             <ThemedView style={styles.buttonRow}>
-                                <TouchableOpacity 
-                                    style={styles.buttonCancel}
-                                    onPress={() => setLoginModalVisible(false)}
-                                >
-                                    <ThemedText style={styles.defaultText}>Cancel</ThemedText>
-                                </TouchableOpacity>
-                                
                                 <TouchableOpacity 
                                     style={styles.buttonSubmit}
                                     onPress={() => {
@@ -152,6 +145,13 @@ export default function HomeScreen() {
                                     }}
                                 >
                                     <ThemedText style={styles.defaultText}>Login</ThemedText>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity 
+                                    style={styles.buttonCancel}
+                                    onPress={() => setLoginModalVisible(false)}
+                                >
+                                    <ThemedText style={styles.defaultText}>Cancel</ThemedText>
                                 </TouchableOpacity>
                             </ThemedView>
                         </ThemedView>
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
 },
 modalContent: {
-    width: '80%',
+    width: '30%',
     backgroundColor: '#EFE0F2',
     borderRadius: 20,
     padding: 20,
@@ -232,7 +232,7 @@ modalContent: {
     elevation: 5
 },
 input: {
-    width: '100%',
+    width: '35%',
     height: 50,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -240,23 +240,28 @@ input: {
     marginBottom: 15,
 },
 buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: 10,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width: '50%',
+  marginTop: 10,
+  backgroundColor: '#EFE0F2',
 },
 buttonCancel: {
     backgroundColor: '#ccc',
     padding: 15,
     borderRadius: 10,
-    width: '45%',
+    width: '35%',
     alignItems: 'center',
+    justifyContent: 'center', // Centers vertically
+    height: 40,  
 },
 buttonSubmit: {
     backgroundColor: '#E57BFF',
-    padding: 15,
+    padding: 5,
     borderRadius: 10,
-    width: '45%',
+    width: '35%',
     alignItems: 'center',
+    justifyContent: 'center', // Centers vertically
+    height: 40, 
 }
 });

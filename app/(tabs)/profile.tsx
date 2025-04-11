@@ -57,29 +57,40 @@ export default function ProfileScreen() {
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-<ThemedView style={styles.profileCard}>
-                <ThemedText style={styles.headerText}>Welcome, {name}!</ThemedText>
+            
+            <ThemedView style={styles.container}>
+            
+                <ThemedView style={styles.profileCard}>
+                    <ThemedText style={styles.headerText}>Welcome, {name}!</ThemedText>
+                    <ThemedView style={styles.infoSection}>
+                        <ThemedText style={styles.label}>Age</ThemedText>
+                        <ThemedText style={styles.value}>{age}</ThemedText>
+                    </ThemedView>
+                    <ThemedView style={styles.infoSection}>
+                        <ThemedText style={styles.label}>Skin Type</ThemedText>
+                        <ThemedText style={styles.value}>{type}</ThemedText>
+                    </ThemedView>
+                    <ThemedView style={styles.infoSection}>
+                        <ThemedText style={styles.label}>Knowledge Level</ThemedText>
+                        <ThemedText style={styles.value}>{knowledgeLevel}</ThemedText>
+                    </ThemedView>
+                    <ThemedView style={styles.goalSection}>
+                        <ThemedText style={styles.label}>Your Skincare Goal</ThemedText>
+                        <ThemedText style={styles.goalText}>{goal}</ThemedText>
+                    </ThemedView>
+                </ThemedView>
+
+                <ThemedView style={styles.analysisCard}>
+                    <ThemedText style={styles.headerText}>Skin Analysis Results</ThemedText>
                 
-                {/* User Info Sections */}
-                <ThemedView style={styles.infoSection}>
-                    <ThemedText style={styles.label}>Age</ThemedText>
-                    <ThemedText style={styles.value}>{age}</ThemedText>
+    
+        
+                    <ThemedView style={styles.analysisSection}>
+                        <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
+                        <ThemedText style={styles.goalText}>I think this is cool</ThemedText>
+                    </ThemedView>
                 </ThemedView>
 
-                <ThemedView style={styles.infoSection}>
-                    <ThemedText style={styles.label}>Skin Type</ThemedText>
-                    <ThemedText style={styles.value}>{type}</ThemedText>
-                </ThemedView>
-
-                <ThemedView style={styles.infoSection}>
-                    <ThemedText style={styles.label}>Knowledge Level</ThemedText>
-                    <ThemedText style={styles.value}>{knowledgeLevel}</ThemedText>
-                </ThemedView>
-
-                <ThemedView style={styles.goalSection}>
-                    <ThemedText style={styles.label}>Your Skincare Goal</ThemedText>
-                    <ThemedText style={styles.goalText}>{goal}</ThemedText>
-                </ThemedView>
             </ThemedView>
         </ScrollView>
     );
@@ -109,6 +120,28 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+    },    
+    analysisCard: {
+        width: '40%',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 20,
+        paddingLeft: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        marginTop: 35
+    },
+    analysisSection: {
+        marginTop: 20,
+        padding: 15,
+        backgroundColor: '#F8E8FA',
+        borderRadius: 10,
     },
     headerText: {
         fontSize: 24,

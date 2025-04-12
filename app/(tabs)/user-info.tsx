@@ -10,6 +10,9 @@ export default function UserInfoScreen() {
   const [age, setAge] = useState('');
 
 
+
+  
+
   const params = useLocalSearchParams();
   const { image, image2 } = params;
   

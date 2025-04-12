@@ -32,31 +32,10 @@ export default function InfoConfirmationScreen() {
         <ThemedText style={styles.userInfoText}>Your skin type is {skinType}</ThemedText>
         <ThemedText style={styles.userInfoText}>Your skincare knowledge level is {knowledgeLevel}</ThemedText>
         <ThemedText style={styles.userInfoText}>Your skincare goal &rarr; {goal}</ThemedText>
-        {/* <ThemedText style={styles.defaultText}>Here are the amazing pictures we got of you!</ThemedText> */}
   
       <ThemedView
         style={styles.rowContainer}
       >
-        {/* <ThemedView
-          style={styles.columnContainerNav}
-        >
-          <View style={{ width: 150, height: 150 }}>
-              <Image
-                  source={{uri: typeof image === 'string' ? image : Array.isArray(image) ? image[0] : ''}}
-                  resizeMode="contain"
-                  style={{ width: '100%', height: '100%' }}
-              />
-          </View>
-
-          <View style={{ width: 150, height: 150 }}>
-              <Image
-                  source={{uri: typeof image2 === 'string' ? image2 : Array.isArray(image2) ? image2[0] : ''}}
-                  resizeMode="contain"
-                  style={{ width: '100%', height: '100%' }}
-              />
-          </View>
-        </ThemedView> */}
-
         <ThemedView
           style={styles.columnContainerNav}
         >
@@ -162,21 +141,16 @@ nextButton:{
   borderRadius: 50,
   marginVertical: 20,
 },
-
 yesButton:{
   backgroundColor: 'lightgreen',
   padding: 15,
   borderRadius: 50,
   marginVertical: 20,
 },
-
 noButton:{
   backgroundColor: 'lightpink',
   padding: 15,
   borderRadius: 50,
   marginVertical: 20,
 },
-
-
-
 });

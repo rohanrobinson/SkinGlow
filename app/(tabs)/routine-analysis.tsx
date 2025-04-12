@@ -28,20 +28,45 @@ export default function RoutineAnalysis() {
     const { name, age, skinGoal, skinType, knowledgeLevel } = params;
     const [infoType, toggleAnalysisOrRoutine] = useState('analysis');
     const [isLoading, setIsLoading] = useState(true);
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [reccomendedRoutine, setRecRoutine] = useState<string[]>([]);    
 
-    const [userList, getExistingUsers] = useState([]);
+
     const [modalVisible, setModalVisible] = useState(false);
-    const [username, setUsername] = useState('type username');
-    const [password, setPassword] = useState('type password');
+    const [username, setUsername] = useState('enter username');
+    const [password, setPassword] = useState('enter password');
+
+
+    function setRoutine() {
+        let routine = [];
+        if (knowledgeLevel == 'I know nothing.') {
+               const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
+               const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen';
+        
+               routine.push(morningRoutine);
+               routine.push(eveningRoutine);
+              }
+
+        else if (knowledgeLevel == 'I am a novice' || knowledgeLevel == 'I am an expert!' ) {
+              const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected. And last use a Sunscreen with SPF 30, daily sunscreen use prevents the visual effects of aging.';
+              const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
+   
+              routine.push(morningRoutine);
+              routine.push(eveningRoutine);      
+        }
+
+        setRecRoutine(routine);
+    
+    }
 
 
     function displaySkinCareRoutine() {
       return (
         <ThemedView style={styles.container}>
-
           <ThemedText style={styles.defaultText}> Hey { name }! Here's a routine to get started with!</ThemedText>
             <ThemedText style={styles.defaultText}>
-                  We're still working on the engine to generate a Routine for you! Check back here soon!
+                  <ThemedText style={styles.defaultText}>{reccomendedRoutine[0]}</ThemedText>
+                  <ThemedText style={styles.defaultText}>{reccomendedRoutine[1]}</ThemedText>
             </ThemedText>
         </ThemedView>
       )
@@ -50,11 +75,10 @@ export default function RoutineAnalysis() {
     function displaySkinCareAnalysis() {
       return(
         <ThemedView style={styles.container}>
-          <ThemedText style={styles.defaultText}>{name}! Here's your skin analysis</ThemedText>
+          <ThemedText style={styles.defaultText}>{name}! Here's Your Skin Analysis</ThemedText>
           <ThemedText style={styles.defaultText}>
-                  We're still working on the engine to generate the analysis for you! Check back here soon!      
+                  We're still working on the engine to generate the analysis for you! Check back here soon!    
           </ThemedText>
-
         </ThemedView>
       )
     }
@@ -87,6 +111,7 @@ export default function RoutineAnalysis() {
       try {
         const newUserDoc = await addDoc(usersRef, userData);
         console.log("Document successfully added:", newUserDoc.id);
+        setShowConfirmation(true);
         return newUserDoc;
       } 
       
@@ -125,6 +150,7 @@ export default function RoutineAnalysis() {
       setTimeout(() => {
           setIsLoading(false);
       }, 1500); // 2000 milliseconds = 2 seconds
+      setRoutine();
     }, [],
   );
 
@@ -234,12 +260,6 @@ export default function RoutineAnalysis() {
                             />
                             
                             <ThemedView style={styles.buttonRow}>
-                                <TouchableOpacity 
-                                    style={styles.buttonCancel}
-                                    onPress={() => setModalVisible(false)}
-                                >
-                                    <ThemedText style={styles.defaultText}>Cancel</ThemedText>
-                                </TouchableOpacity>
                                 
                                 <TouchableOpacity 
                                     style={styles.buttonSubmit}
@@ -252,10 +272,47 @@ export default function RoutineAnalysis() {
                                 >
                                     <ThemedText style={styles.defaultText}>Sign Up</ThemedText>
                                 </TouchableOpacity>
+
+                                <TouchableOpacity 
+                                    style={styles.buttonCancel}
+                                    onPress={() => setModalVisible(false)}
+                                >
+                                    <ThemedText style={styles.defaultText}>Cancel</ThemedText>
+                                </TouchableOpacity>
+
                             </ThemedView>
                         </ThemedView>
                     </ThemedView>
-                  </Modal>          
+                  </Modal>     
+
+              <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={showConfirmation}
+                  onRequestClose={() => setShowConfirmation(false)}
+              >
+                  <ThemedView style={styles.modalBackground}>
+                      <ThemedView style={styles.modalContent}>
+                          <ThemedText style={styles.defaultText}>Welcome to SkinGlow! 🎉</ThemedText>
+                          <ThemedText style={styles.defaultText}>Your account has been created successfully!</ThemedText>
+                          
+                          <TouchableOpacity 
+                              style={styles.buttonSubmit}
+                              onPress={() => {
+                                  setShowConfirmation(false);
+                                  router.push({
+                                    pathname: '/profile',
+                                    params: {
+                                      username: username,
+                                    }
+                                  });
+                              }}
+                          >
+                              <ThemedText style={styles.defaultText}>{username}! Check out your profile!</ThemedText>
+                          </TouchableOpacity>
+                      </ThemedView>
+                  </ThemedView>
+              </Modal>     
         </ThemedView>
       </ThemedView>
       </ScrollView>

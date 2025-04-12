@@ -81,15 +81,24 @@ export default function ProfileScreen() {
                 </ThemedView>
 
                 <ThemedView style={styles.analysisCard}>
+                    <ThemedText style={styles.headerText}>Reccomended Skincare Routine</ThemedText>
+        
+                    <ThemedView style={styles.analysisSection}>
+                        <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
+                        <ThemedText style={styles.goalText}>Youe skin analysis is a thing!</ThemedText>
+                    </ThemedView>
+                </ThemedView>
+
+                <ThemedView style={styles.analysisCard}>
                     <ThemedText style={styles.headerText}>Skin Analysis Results</ThemedText>
-                
-    
         
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
                         <ThemedText style={styles.goalText}>I think this is cool</ThemedText>
                     </ThemedView>
                 </ThemedView>
+
+
 
             </ThemedView>
         </ScrollView>

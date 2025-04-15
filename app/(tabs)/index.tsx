@@ -95,11 +95,6 @@ export default function HomeScreen() {
             <ThemedText style={styles.defaultText}  type="subtitle"> (2) View your Personalized Routine and Analysis</ThemedText>
           </ThemedView>
 
-          <ThemedView>
-              <ThemedText>{height}</ThemedText>
-              <ThemedText>{width}</ThemedText>
-          </ThemedView>
-
           <TouchableOpacity
             style={styles.button}
             onPress={() => router.push('/user-info') }
@@ -273,13 +268,11 @@ modalContent: {
   shadowRadius: 4,
   elevation: 5
 },
-input: {
+  input: {
     width: '35%',
-    height: 50,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 15,
+    height: 50 * scale,
+    padding: 10 * scale,
+    marginBottom: 15 * scale,
 },
 buttonRow: {
   flexDirection: 'row',

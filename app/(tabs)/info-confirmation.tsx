@@ -39,7 +39,7 @@ export default function InfoConfirmationScreen() {
         <ThemedView
           style={styles.columnContainerNav}
         >
-            <TouchableOpacity onPress={() => router.push('/take-pics') }
+            <TouchableOpacity onPress={() => router.push('/user-info') }
                 style={styles.noButton}
               >
                 <ThemedText style={styles.defaultText}>No</ThemedText> 

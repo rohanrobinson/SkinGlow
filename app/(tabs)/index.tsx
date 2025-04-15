@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Image, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { Image, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, Dimensions } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
@@ -8,6 +8,10 @@ import { useState } from 'react';
 // import { signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
+
+const { width, height } = Dimensions.get('window');
+const scale = Math.min(width, height) / 375; // Using 375 as base width
+
 
 // Example auth usage
 // function login(email, password) {
@@ -89,7 +93,13 @@ export default function HomeScreen() {
           </ThemedView> 
            <ThemedView style={styles.stepContainer}>
             <ThemedText style={styles.defaultText}  type="subtitle"> (2) View your Personalized Routine and Analysis</ThemedText>
-          </ThemedView>  
+          </ThemedView>
+
+          <ThemedView>
+              <ThemedText>{height}</ThemedText>
+              <ThemedText>{width}</ThemedText>
+          </ThemedView>
+
           <TouchableOpacity
             style={styles.button}
             onPress={() => router.push('/user-info') }
@@ -204,6 +214,7 @@ const styles = StyleSheet.create({
   },
   defaultText: {
     color: 'black',
+    fontSize: Math.max(14 * scale, 12), // Minimum size of 12
   },
   logoFun: {
     marginTop: 100,
@@ -248,19 +259,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
 },
 modalContent: {
-    width: '30%',
-    backgroundColor: '#EFE0F2',
-    borderRadius: 20,
-    padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-        width: 0,
-        height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
+  width: width > 768 ? '30%' : '80%', // Wider on tablets/desktop, narrower on phones
+  backgroundColor: '#EFE0F2',
+  borderRadius: 20,
+  padding: 20,
+  alignItems: 'center',
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 2
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5
 },
 input: {
     width: '35%',

@@ -61,7 +61,6 @@ export default function InfoConfirmationScreen() {
                 <ThemedText style={styles.defaultText}
                 >Yes</ThemedText> 
             </TouchableOpacity>
-          
         </ThemedView>
       </ThemedView>
 

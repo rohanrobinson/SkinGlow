@@ -15,6 +15,7 @@ export default function ProfileScreen() {
     const [type, setSkinType] = useState("");
     const [knowledgeLevel, setKnowledgeLevel] = useState("");
     const [name, setName] = useState("");
+    const [routine, setRecRoutine] = useState<string[]>([]);
 
     const setProperties  = (userData: any) => {
         setGoal(userData.skinProfile.skinGoal);
@@ -40,6 +41,27 @@ export default function ProfileScreen() {
             setIsLoading(false);
         }
     };
+
+
+    function generateRoutine() {
+        let routine = [];
+        if (knowledgeLevel == 'I know nothing.') {
+               const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
+               const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen';
+        
+               routine.push(morningRoutine);
+               routine.push(eveningRoutine);
+              }
+
+        else if (knowledgeLevel == 'I am a novice' || knowledgeLevel == 'I am an expert!' ) {
+              const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected. And last use a Sunscreen with SPF 30, daily sunscreen use prevents the visual effects of aging.';
+              const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
+   
+              routine.push(morningRoutine);
+              routine.push(eveningRoutine);      
+        }
+        setRecRoutine(routine);
+    }
 
     useEffect(() => {
         fetchUserProfile();
@@ -84,7 +106,7 @@ export default function ProfileScreen() {
                     <ThemedText style={styles.headerText}>Reccomended Skincare Routine</ThemedText>
         
                     <ThemedView style={styles.analysisSection}>
-                        <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
+                        <ThemedText style={styles.label}>Your Skincare Plan</ThemedText>
                         <ThemedText style={styles.goalText}>Youe skin analysis is a thing!</ThemedText>
                     </ThemedView>
                 </ThemedView>

@@ -3,15 +3,10 @@ import { Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'reac
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
-import { Console } from 'console';
 
 export default function UserInfoScreen() {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-
-
-
-  
 
   const params = useLocalSearchParams();
   const { image, image2 } = params;

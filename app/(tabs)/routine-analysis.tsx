@@ -37,7 +37,7 @@ export default function RoutineAnalysis() {
     const [password, setPassword] = useState('enter password');
 
 
-    function setRoutine() {
+    function generateRoutine() {
         let routine = [];
         if (knowledgeLevel == 'I know nothing.') {
                const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
@@ -54,9 +54,12 @@ export default function RoutineAnalysis() {
               routine.push(morningRoutine);
               routine.push(eveningRoutine);      
         }
-
+        
         setRecRoutine(routine);
-    
+    }
+
+    function generateAnalysis() {
+        console.log('asdf');
     }
 
 
@@ -150,7 +153,8 @@ export default function RoutineAnalysis() {
       setTimeout(() => {
           setIsLoading(false);
       }, 1500); // 2000 milliseconds = 2 seconds
-      setRoutine();
+      generateRoutine();
+      generateAnalysis();
     }, [],
   );
 
@@ -169,6 +173,7 @@ export default function RoutineAnalysis() {
         <ThemedView style={styles.container}>
           <TouchableOpacity
               style={styles.logoFun}
+              onPress={() => router.push('/')}
           >
                 <Image 
                   source={require('@/assets/images/skinglow-logo.png')} 
@@ -238,7 +243,7 @@ export default function RoutineAnalysis() {
                   >
                     <ThemedView style={styles.modalBackground}>
                         <ThemedView style={styles.modalContent}>
-                            <ThemedText style={styles.defaultText}>Unlock the Best Skincare Knowledge by making a Free Skin Glow Account!</ThemedText>
+                            <ThemedText style={styles.defaultText}>Unlock your Best Skin by making a Free Skin Glow Account!</ThemedText>
                             
                             <ThemedText style={styles.defaultText}>Username</ThemedText>
                             <TextInput
@@ -249,7 +254,7 @@ export default function RoutineAnalysis() {
                                 placeholderTextColor="#999"
                             />
                             
-                            <ThemedText style={styles.defaultText}>Password</ThemedText>
+                            {/* <ThemedText style={styles.defaultText}>Password</ThemedText>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={setPassword}
@@ -257,8 +262,7 @@ export default function RoutineAnalysis() {
                                 placeholder="Enter your password"
                                 secureTextEntry={false}
                                 placeholderTextColor="#999"
-                            />
-                            
+                            /> */}
                             <ThemedView style={styles.buttonRow}>
                                 
                                 <TouchableOpacity 
@@ -279,7 +283,6 @@ export default function RoutineAnalysis() {
                                 >
                                     <ThemedText style={styles.defaultText}>Cancel</ThemedText>
                                 </TouchableOpacity>
-
                             </ThemedView>
                         </ThemedView>
                     </ThemedView>

@@ -34,7 +34,7 @@ const checkIfUserInDb = async (usernameToCheck: string) => {
       
       if (querySnapshot.empty) {
           console.log("No matching user found");
-          return null;
+          return "failure";
       }
 
       // Get the first matching document
@@ -54,7 +54,9 @@ export default function HomeScreen() {
 
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  // const [password, setPassword] = useState('');
 
   const getUserProfile = async (usernameToCheck: string) => {
     const message = await checkIfUserInDb(usernameToCheck);
@@ -68,8 +70,8 @@ export default function HomeScreen() {
       });
     }
 
-    else {
-       console.log("there is an error");
+    if (message === "failure") {
+       setShowErrorModal(true);
     }
 
 }
@@ -82,9 +84,6 @@ export default function HomeScreen() {
              />
             <ThemedText style={styles.defaultText} type="title" >Skin Glow</ThemedText>
               <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 2 Easy Steps</ThemedText> 
-          {/* <ThemedView style={styles.stepContainer}>
-            <ThemedText  style={styles.defaultText} type="subtitle">(1) Take 2 Pictures</ThemedText>
-          </ThemedView>  */}
            <ThemedView style={styles.stepContainer}>
             <ThemedText  style={styles.defaultText} type="subtitle">(1) Answer a Few Questions</ThemedText>
           </ThemedView> 
@@ -156,6 +155,38 @@ export default function HomeScreen() {
                             </ThemedView>
                         </ThemedView>
                     </ThemedView>
+                </Modal>
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={showErrorModal}
+                    onRequestClose={() => setShowErrorModal(false)}
+                >
+                  <ThemedView style={styles.modalBackground}>
+                      <ThemedView style={styles.modalContent}>
+                          <ThemedText style={styles.defaultText}>Sorry 😕 We were not able to find {username} in our system!</ThemedText>
+                          <ThemedText style={styles.defaultText}>Tap Start if you're new to Skin Glow!</ThemedText>
+                          <TouchableOpacity 
+                              style={styles.accountButton}
+                              onPress={() => {
+                                  setShowErrorModal(false);
+                                  setLoginModalVisible(true); // Reopen login modal
+                              }}
+                          >
+                              <ThemedText style={styles.buttonText}>Try Again</ThemedText>
+                          </TouchableOpacity>
+
+                          <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => {
+                              setShowErrorModal(false);
+                              router.push('/user-info')} }
+                          >
+            <ThemedText style={styles.buttonText}>Start</ThemedText>
+          </TouchableOpacity>
+                      </ThemedView>
+                  </ThemedView>
                 </Modal>
       </ThemedView>
     </ScrollView>

@@ -54,7 +54,7 @@ export default function RoutineAnalysis() {
               routine.push(morningRoutine);
               routine.push(eveningRoutine);      
         }
-        
+
         setRecRoutine(routine);
     }
 
@@ -182,7 +182,6 @@ export default function RoutineAnalysis() {
 
           <ThemedView style={styles.rowContainer}>
 
-              <ThemedView>
                     { infoType === 'routine' ? 
                     <Pressable onPress={() => toggleAnalysisOrRoutine('routine')}
                         style={styles.selectedButton}
@@ -196,8 +195,6 @@ export default function RoutineAnalysis() {
                       <ThemedText style={styles.defaultText}>Routine</ThemedText>
                     </Pressable>
                    }
-              </ThemedView>
-              <ThemedView>
                         { infoType === 'analysis' ? 
 
                         <Pressable onPress={() => toggleAnalysisOrRoutine('analysis')}
@@ -212,7 +209,6 @@ export default function RoutineAnalysis() {
                           <ThemedText style={styles.defaultText}>Analysis</ThemedText>
                         </Pressable>
                         }
-              </ThemedView>
           </ThemedView>
 
           <ThemedView>
@@ -347,7 +343,7 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: '6%',
     paddingHorizontal: 10,
     backgroundColor: '#EFE0F2',

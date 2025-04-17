@@ -1,8 +1,11 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, TextInput, ScrollView, Dimensions } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState } from 'react';
+
+const { width, height } = Dimensions.get('window');
+const scale = Math.min(width, height) / 375; // Using 375 as base width (this came from Claude)
 
 export default function UserInfoScreen() {
   const [name, setName] = useState('');
@@ -110,6 +113,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   defaultText: {
-    color: 'black'
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: Math.max(14 * scale, 12), // Minimum size of 12
   },
 });

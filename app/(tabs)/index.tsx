@@ -10,7 +10,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 const { width, height } = Dimensions.get('window');
-const scale = Math.min(width, height) / 375; // Using 375 as base width
+const scale = Math.min(width, height) / 375; // Using 375 as base width (this came from Claude)
 
 
 // Example auth usage

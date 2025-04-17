@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
         paddingVertical: 12 * scale,
         borderBottomWidth: 1,
         borderBottomColor: '#E57BFF',
+        backgroundColor: 'white',  // Add this to explicitly set background color
     },
     goalSection: {
         marginTop: 15 * scale,

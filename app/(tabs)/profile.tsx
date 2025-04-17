@@ -1,10 +1,13 @@
 import { useLocalSearchParams } from 'expo-router';
-import { Image, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, ActivityIndicator } from 'react-native';
+import { Image, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, ActivityIndicator, Dimensions } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase';
+
+const { width, height } = Dimensions.get('window');
+const scale = Math.min(width, height) / 375; // Using 375 as base width (this came from Claude)
 
 export default function ProfileScreen() {
     const params = useLocalSearchParams();
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#EFE0F2',
         alignItems: 'center',
-        padding: 40,
+        padding: 20 * scale,
     },
     scrollContainer: {
         flexGrow: 1,
@@ -140,9 +143,10 @@ const styles = StyleSheet.create({
     profileCard: {
         width: '40%',
         backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 20,
+        borderRadius: 20 * scale,
+        padding: 20 * scale,
         paddingLeft: 20,
+        marginTop: 20 * scale,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -155,8 +159,8 @@ const styles = StyleSheet.create({
     analysisCard: {
         width: '40%',
         backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 20,
+        borderRadius: 20 * scale,
+        padding: 20 * scale,
         paddingLeft: 20,
         shadowColor: '#000',
         shadowOffset: {
@@ -166,50 +170,50 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        marginTop: 35
+        marginTop: 20 * scale
     },
     analysisSection: {
-        marginTop: 20,
-        padding: 15,
+        marginTop: 15 * scale,
+        padding: 15 * scale,
         backgroundColor: '#F8E8FA',
-        borderRadius: 10,
+        borderRadius: 10 * scale,
     },
     headerText: {
-        fontSize: 24,
+        fontSize: Math.max(24 * scale, 18),
         fontWeight: 'bold',
         color: 'black',
-        marginBottom: 20,
+        marginBottom: 15 * scale,
         textAlign: 'center',
     },
     infoSection: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 15,
+        paddingVertical: 12 * scale,
         borderBottomWidth: 1,
         borderBottomColor: '#E57BFF',
     },
     goalSection: {
-        marginTop: 20,
-        padding: 15,
+        marginTop: 15 * scale,
+        padding: 15 * scale,
         backgroundColor: '#F8E8FA',
-        borderRadius: 10,
+        borderRadius: 10 * scale,
     },
     label: {
-        fontSize: 16,
+        fontSize: Math.max(16 * scale, 14),
         color: '#666',
         fontWeight: '500',
     },
     value: {
-        fontSize: 16,
+        fontSize: Math.max(16 * scale, 14), // Minimum size of 14,
         color: 'black',
         fontWeight: 'bold',
     },
     goalText: {
-        fontSize: 16,
+        fontSize: Math.max(16 * scale, 14),
         color: 'black',
-        marginTop: 8,
+        marginTop: 8 * scale,
         fontStyle: 'italic',
-        lineHeight: 24,
+        lineHeight: 24 * scale,
     }
 });

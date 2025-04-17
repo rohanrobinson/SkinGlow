@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
     },
     profileCard: {
-        width: '40%',
+        width: '80%',
         backgroundColor: 'white',
         borderRadius: 20 * scale,
         padding: 20 * scale,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },    
     analysisCard: {
-        width: '40%',
+        width: '80%',
         backgroundColor: 'white',
         borderRadius: 20 * scale,
         padding: 20 * scale,

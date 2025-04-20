@@ -1,5 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
-import { Image, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, ActivityIndicator, Dimensions } from 'react-native';
+import { Image, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput,
+         ActivityIndicator,
+         Dimensions, Pressable } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
@@ -10,6 +12,7 @@ const { width, height } = Dimensions.get('window');
 const scale = Math.min(width, height) / 375; // Using 375 as base width (this came from Claude)
 
 export default function ProfileScreen() {
+
     const params = useLocalSearchParams();
     const { username } = params;
     const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +22,45 @@ export default function ProfileScreen() {
     const [knowledgeLevel, setKnowledgeLevel] = useState("");
     const [name, setName] = useState("");
     const [routine, setRecRoutine] = useState<string[]>([]);
+
+    const [userData, setUserData] = useState({
+        name: name, // Example name
+        age: age,
+        type: type,
+        knowledgeLevel: knowledgeLevel,
+        goal: goal,
+      });
+
+    const [tempUserData, setTempUserData] = useState({...userData});
+
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    // Handler to toggle edit mode
+    const toggleEditMode = () => {
+        if (isEditMode) {
+        // Save changes when exiting edit mode
+        setUserData({...tempUserData});
+        } 
+        else {
+        // Initialize temp data with current values when entering edit mode
+        setTempUserData({...userData});
+        }
+        setIsEditMode(!isEditMode);
+    };
+
+    // Handler to update temp values during editing
+    const handleChange = (field: any, value: any) => {
+        setTempUserData({
+        ...tempUserData,
+        [field]: value
+        });
+    };
+
+      // Cancel edit without saving
+    const handleCancel = () => {
+        setIsEditMode(false);
+        setUserData(userData);
+    };
 
     const setProperties  = (userData: any) => {
         setGoal(userData.skinProfile.skinGoal);
@@ -30,12 +72,13 @@ export default function ProfileScreen() {
 
     const fetchUserProfile = async () => {
         try {
+            console.log("fetch user profile ** called by useEffect **");
             const usersRef = collection(db, 'users');
             const q = query(usersRef, where("username", "==", username));
             const querySnapshot = await getDocs(q);
-            
             if (!querySnapshot.empty) {
                 const userData = querySnapshot.docs[0].data();
+                console.log(userData);
                 setProperties(userData);
             }
         } catch (error) {
@@ -84,25 +127,97 @@ export default function ProfileScreen() {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             
             <ThemedView style={styles.container}>
-            
                 <ThemedView style={styles.profileCard}>
-                    <ThemedText style={styles.headerText}>Welcome, {name}!</ThemedText>
+                    <ThemedText style={styles.headerText}>{isEditMode ? 'Edit Profile' : `Welcome, ${userData.name}!`}</ThemedText>
+                   
+                    {/* AGE FIELD */}
                     <ThemedView style={styles.infoSection}>
                         <ThemedText style={styles.label}>Age</ThemedText>
-                        <ThemedText style={styles.value}>{age}</ThemedText>
+                        {isEditMode ? (
+                        <TextInput
+                            style={styles.input}
+                            value={tempUserData.age}
+                            onChangeText={(text) => handleChange('age', text)}
+                            keyboardType="numeric"
+                        />
+                        ) : (
+                        <ThemedText style={styles.value}>{userData.age}</ThemedText>
+                        )}
                     </ThemedView>
+                   
+                    {/* SKIN TYPE FIELD */}
                     <ThemedView style={styles.infoSection}>
                         <ThemedText style={styles.label}>Skin Type</ThemedText>
-                        <ThemedText style={styles.value}>{type}</ThemedText>
+                        {isEditMode ? (
+                        <TextInput
+                            style={styles.input}
+                            value={tempUserData.type}
+                            onChangeText={(text) => handleChange('type', text)}
+                        />
+                        ) : (
+                        <ThemedText style={styles.value}>{userData.type}</ThemedText>
+                        )}
                     </ThemedView>
+
+                    {/* KNOWLEDGE LEVEL FIELD */}
                     <ThemedView style={styles.infoSection}>
                         <ThemedText style={styles.label}>Knowledge Level</ThemedText>
-                        <ThemedText style={styles.value}>{knowledgeLevel}</ThemedText>
+                        {isEditMode ? (
+                        <TextInput
+                            style={styles.input}
+                            value={tempUserData.knowledgeLevel}
+                            onChangeText={(text) => handleChange('knowledgeLevel', text)}
+                        />
+                        ) : (
+                        <ThemedText style={styles.value}>{userData.knowledgeLevel}</ThemedText>
+                        )}
                     </ThemedView>
+
+                    {/* GOAL FIELD */}
                     <ThemedView style={styles.goalSection}>
                         <ThemedText style={styles.label}>Your Skincare Goal</ThemedText>
-                        <ThemedText style={styles.goalText}>{goal}</ThemedText>
+                        {isEditMode ? (
+                        <TextInput
+                            style={[styles.input, styles.goalInput]}
+                            value={tempUserData.goal}
+                            onChangeText={(text) => handleChange('goal', text)}
+                            multiline={true}
+                        />
+                        ) : (
+                        <ThemedText style={styles.goalText}>{userData.goal}</ThemedText>
+                        )}
                     </ThemedView>
+                    
+                    {/* BUTTONS */}
+                    {isEditMode ? (
+                        <ThemedView style={styles.buttonContainer}>
+                            <TouchableOpacity
+                                style={styles.saveButton}
+                                onPress={toggleEditMode}
+                            >
+                                <ThemedText style={styles.defaultText}>Save</ThemedText>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity
+                                style={[styles.button, styles.cancelButton]}
+                                onPress={handleCancel}
+                            >
+                                <ThemedText style={styles.defaultText}>Cancel</ThemedText>
+                            </TouchableOpacity>
+                        </ThemedView>
+                    ) : (
+                        <ThemedView style={styles.buttonContainer}>
+                        <TouchableOpacity
+                        style={styles.editUserBtn}
+                        onPress={toggleEditMode}
+                        >
+                        <ThemedText style={styles.defaultText}>Edit</ThemedText>
+                        </TouchableOpacity>
+                        </ThemedView>
+                    )}
+                </ThemedView>
+
                 </ThemedView>
 
                 <ThemedView style={styles.analysisCard}>
@@ -122,10 +237,6 @@ export default function ProfileScreen() {
                         <ThemedText style={styles.goalText}>I think this is cool</ThemedText>
                     </ThemedView>
                 </ThemedView>
-
-
-
-            </ThemedView>
         </ScrollView>
     );
 }
@@ -185,6 +296,14 @@ const styles = StyleSheet.create({
         marginBottom: 15 * scale,
         textAlign: 'center',
     },
+    defaultText: {
+        color: 'black',
+        fontSize: Math.max(14 * scale, 12), // Minimum size of 12
+      },
+    saveText: {
+        color: 'black',
+        fontSize: Math.max(10 * scale, 12), // Minimum size of 12 
+    },
     infoSection: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -193,7 +312,31 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#E57BFF',
         backgroundColor: 'white',  // Add this to explicitly set background color
+    }, 
+    input: {
+        width: '35%',
+        height: 50 * scale,
+        padding: 10 * scale,
+        marginBottom: 15 * scale,
+        fontSize: 100,  
+    }, 
+    goalInput: {
+        marginTop: 4,
+        minHeight: 60,
+        width: '100%',
     },
+    button: {
+        padding: 12,
+        borderRadius: 6,
+        alignItems: 'center',
+        flex: 1,
+        marginHorizontal: 4,
+      },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 16,
+      },
     goalSection: {
         marginTop: 15 * scale,
         padding: 15 * scale,
@@ -216,5 +359,26 @@ const styles = StyleSheet.create({
         marginTop: 8 * scale,
         fontStyle: 'italic',
         lineHeight: 24 * scale,
+    },
+    editUserBtn: {
+        marginTop: 30,
+        height: 200, 
+        width: 300,
+        backgroundColor: '#E57BFF',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+    saveButton: {
+        backgroundColor: '#E57BFF',
+        height: 150, 
+        width: 150,
+        alignItems: 'center',
+        padding: 12,
+        borderRadius: 6,
+        flex: 1,
+        marginHorizontal: 4,
+      },
+    cancelButton: {
+        backgroundColor: '#ccc',
     }
 });

@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
-import { Image, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput,
+import { StyleSheet, ScrollView, TouchableOpacity, TextInput,
          ActivityIndicator,
-         Dimensions, Pressable } from 'react-native';
+         Dimensions } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
@@ -21,17 +21,22 @@ export default function ProfileScreen() {
     const [type, setSkinType] = useState("");
     const [knowledgeLevel, setKnowledgeLevel] = useState("");
     const [name, setName] = useState("");
-    const [routine, setRecRoutine] = useState<string[]>([]);
+    // Replace multiple useState calls with a single one for user profile data
+    const [userProfile, setUserProfile] = useState({
+            name: "",
+            goal: "",
+            age: "",
+            skinType: "",
+            knowledgeLevel: "",
+    });
 
-    const [userData, setUserData] = useState({
-        name: name, // Example name
-        age: age,
-        type: type,
-        knowledgeLevel: knowledgeLevel,
-        goal: goal,
-      });
-
-    const [tempUserData, setTempUserData] = useState({...userData});
+    const [tempUserProfile, setTempUserProfile] = useState({
+            name: "",
+            goal: "",
+            age: "",
+            skinType: "",
+            knowledgeLevel: "",
+    });
 
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -39,19 +44,19 @@ export default function ProfileScreen() {
     const toggleEditMode = () => {
         if (isEditMode) {
         // Save changes when exiting edit mode
-        setUserData({...tempUserData});
+        setUserProfile({...tempUserProfile});
         } 
         else {
         // Initialize temp data with current values when entering edit mode
-        setTempUserData({...userData});
+        setTempUserProfile({...userProfile});
         }
         setIsEditMode(!isEditMode);
     };
 
     // Handler to update temp values during editing
     const handleChange = (field: any, value: any) => {
-        setTempUserData({
-        ...tempUserData,
+        setTempUserProfile({
+        ...tempUserProfile,
         [field]: value
         });
     };
@@ -59,10 +64,12 @@ export default function ProfileScreen() {
       // Cancel edit without saving
     const handleCancel = () => {
         setIsEditMode(false);
-        setUserData(userData);
+        setUserProfile(userProfile);
     };
 
     const setProperties  = (userData: any) => {
+        console.log("user goal is-");
+        console.log(userData.skinProfile.skinGoal)
         setGoal(userData.skinProfile.skinGoal);
         setAge(userData.skinProfile.age);
         setSkinType(userData.skinProfile.skinType);
@@ -72,14 +79,22 @@ export default function ProfileScreen() {
 
     const fetchUserProfile = async () => {
         try {
-            console.log("fetch user profile ** called by useEffect **");
             const usersRef = collection(db, 'users');
             const q = query(usersRef, where("username", "==", username));
             const querySnapshot = await getDocs(q);
             if (!querySnapshot.empty) {
                 const userData = querySnapshot.docs[0].data();
-                console.log(userData);
                 setProperties(userData);
+
+                // Update all user profile data at once
+                setUserProfile({
+                    name: userData.skinProfile.name || "",
+                    goal: userData.skinProfile.skinGoal || "",
+                    age: userData.skinProfile.age || "",
+                    skinType: userData.skinProfile.skinType || "", 
+                    knowledgeLevel: userData.skinProfile.knowledgeLevel || "",
+                });
+                
             }
         } catch (error) {
             console.error("Error fetching user profile:", error);
@@ -89,25 +104,25 @@ export default function ProfileScreen() {
     };
 
 
-    function generateRoutine() {
-        let routine = [];
-        if (knowledgeLevel == 'I know nothing.') {
-               const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
-               const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen';
+    // function generateRoutine() {
+    //     let routine = [];
+    //     if (knowledgeLevel == 'I know nothing.') {
+    //            const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
+    //            const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen';
         
-               routine.push(morningRoutine);
-               routine.push(eveningRoutine);
-              }
+    //            routine.push(morningRoutine);
+    //            routine.push(eveningRoutine);
+    //           }
 
-        else if (knowledgeLevel == 'I am a novice' || knowledgeLevel == 'I am an expert!' ) {
-              const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected. And last use a Sunscreen with SPF 30, daily sunscreen use prevents the visual effects of aging.';
-              const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
+    //     else if (knowledgeLevel == 'I am a novice' || knowledgeLevel == 'I am an expert!' ) {
+    //           const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected. And last use a Sunscreen with SPF 30, daily sunscreen use prevents the visual effects of aging.';
+    //           const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
    
-              routine.push(morningRoutine);
-              routine.push(eveningRoutine);      
-        }
-        setRecRoutine(routine);
-    }
+    //           routine.push(morningRoutine);
+    //           routine.push(eveningRoutine);      
+    //     }
+    //     setRecRoutine(routine);
+    // }
 
     useEffect(() => {
         fetchUserProfile();
@@ -122,26 +137,25 @@ export default function ProfileScreen() {
         );
     }
 
-
     return (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             
             <ThemedView style={styles.container}>
                 <ThemedView style={styles.profileCard}>
-                    <ThemedText style={styles.headerText}>{isEditMode ? 'Edit Profile' : `Welcome, ${userData.name}!`}</ThemedText>
-                   
+                    <ThemedText style={styles.headerText}>{isEditMode ? 'Edit Profile' : `Welcome ${name}!`}</ThemedText>
+                    
                     {/* AGE FIELD */}
                     <ThemedView style={styles.infoSection}>
                         <ThemedText style={styles.label}>Age</ThemedText>
                         {isEditMode ? (
                         <TextInput
                             style={styles.input}
-                            value={tempUserData.age}
+                            value={tempUserProfile.age}
                             onChangeText={(text) => handleChange('age', text)}
                             keyboardType="numeric"
                         />
                         ) : (
-                        <ThemedText style={styles.value}>{userData.age}</ThemedText>
+                        <ThemedText style={styles.value}>{userProfile.age}</ThemedText>
                         )}
                     </ThemedView>
                    
@@ -151,11 +165,11 @@ export default function ProfileScreen() {
                         {isEditMode ? (
                         <TextInput
                             style={styles.input}
-                            value={tempUserData.type}
+                            value={tempUserProfile.skinType}
                             onChangeText={(text) => handleChange('type', text)}
                         />
                         ) : (
-                        <ThemedText style={styles.value}>{userData.type}</ThemedText>
+                        <ThemedText style={styles.value}>{userProfile.skinType}</ThemedText>
                         )}
                     </ThemedView>
 
@@ -165,11 +179,11 @@ export default function ProfileScreen() {
                         {isEditMode ? (
                         <TextInput
                             style={styles.input}
-                            value={tempUserData.knowledgeLevel}
+                            value={tempUserProfile.knowledgeLevel}
                             onChangeText={(text) => handleChange('knowledgeLevel', text)}
                         />
                         ) : (
-                        <ThemedText style={styles.value}>{userData.knowledgeLevel}</ThemedText>
+                        <ThemedText style={styles.value}>{userProfile.knowledgeLevel}</ThemedText>
                         )}
                     </ThemedView>
 
@@ -179,12 +193,12 @@ export default function ProfileScreen() {
                         {isEditMode ? (
                         <TextInput
                             style={[styles.input, styles.goalInput]}
-                            value={tempUserData.goal}
+                            value={tempUserProfile.goal}
                             onChangeText={(text) => handleChange('goal', text)}
                             multiline={true}
                         />
                         ) : (
-                        <ThemedText style={styles.goalText}>{userData.goal}</ThemedText>
+                        <ThemedText style={styles.goalText}>{userProfile.goal}</ThemedText>
                         )}
                     </ThemedView>
                     
@@ -225,7 +239,7 @@ export default function ProfileScreen() {
         
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Plan</ThemedText>
-                        <ThemedText style={styles.goalText}>Youe skin analysis is a thing!</ThemedText>
+                        <ThemedText style={styles.goalText}>With the right routine, you're gonna be looking **** soon!</ThemedText>
                     </ThemedView>
                 </ThemedView>
 
@@ -234,7 +248,7 @@ export default function ProfileScreen() {
         
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
-                        <ThemedText style={styles.goalText}>I think this is cool</ThemedText>
+                        <ThemedText style={styles.goalText}>Skin analysis is a cool concept</ThemedText>
                     </ThemedView>
                 </ThemedView>
         </ScrollView>
@@ -362,16 +376,16 @@ const styles = StyleSheet.create({
     },
     editUserBtn: {
         marginTop: 30,
-        height: 200, 
-        width: 300,
+        height: 75, 
+        width: 75,
         backgroundColor: '#E57BFF',
         justifyContent: 'center',
         alignItems: 'center',
       },
     saveButton: {
         backgroundColor: '#E57BFF',
-        height: 150, 
-        width: 150,
+        height: 75, 
+        width: 75,
         alignItems: 'center',
         padding: 12,
         borderRadius: 6,
@@ -380,5 +394,12 @@ const styles = StyleSheet.create({
       },
     cancelButton: {
         backgroundColor: '#ccc',
+        padding: 12,
+        borderRadius: 6,
+        alignItems: 'center',
+        flex: 1,
+        marginHorizontal: 4,
+        height: 75, 
+        width: 75,
     }
 });

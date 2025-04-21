@@ -166,7 +166,7 @@ export default function ProfileScreen() {
                         <TextInput
                             style={styles.input}
                             value={tempUserProfile.skinType}
-                            onChangeText={(text) => handleChange('type', text)}
+                            onChangeText={(text) => handleChange('skinType', text)}
                         />
                         ) : (
                         <ThemedText style={styles.value}>{userProfile.skinType}</ThemedText>
@@ -212,7 +212,6 @@ export default function ProfileScreen() {
                                 <ThemedText style={styles.defaultText}>Save</ThemedText>
                             </TouchableOpacity>
 
-
                             <TouchableOpacity
                                 style={[styles.button, styles.cancelButton]}
                                 onPress={handleCancel}
@@ -231,12 +230,8 @@ export default function ProfileScreen() {
                         </ThemedView>
                     )}
                 </ThemedView>
-
-                </ThemedView>
-
                 <ThemedView style={styles.analysisCard}>
                     <ThemedText style={styles.headerText}>Reccomended Skincare Routine</ThemedText>
-        
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Plan</ThemedText>
                         <ThemedText style={styles.goalText}>With the right routine, you're gonna be looking **** soon!</ThemedText>
@@ -245,13 +240,14 @@ export default function ProfileScreen() {
 
                 <ThemedView style={styles.analysisCard}>
                     <ThemedText style={styles.headerText}>Skin Analysis Results</ThemedText>
-        
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
                         <ThemedText style={styles.goalText}>Skin analysis is a cool concept</ThemedText>
                     </ThemedView>
                 </ThemedView>
-        </ScrollView>
+
+        </ThemedView>
+    </ScrollView>
     );
 }
 
@@ -329,10 +325,10 @@ const styles = StyleSheet.create({
     }, 
     input: {
         width: '35%',
-        height: 50 * scale,
+        height: 30 * scale,
         padding: 10 * scale,
         marginBottom: 15 * scale,
-        fontSize: 100,  
+        fontSize: 30,  
     }, 
     goalInput: {
         marginTop: 4,
@@ -350,6 +346,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 16,
+        backgroundColor: 'white',
       },
     goalSection: {
         marginTop: 15 * scale,

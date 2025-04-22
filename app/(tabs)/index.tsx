@@ -60,6 +60,7 @@ export default function HomeScreen() {
   const [username, setUsername] = useState('');
   const [showErrorModal, setShowErrorModal] = useState(false);
 
+
   // const [password, setPassword] = useState('');
 
   const getUserProfile = async (usernameToCheck: string) => {

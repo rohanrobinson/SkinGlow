@@ -39,21 +39,11 @@ export default function RoutineAnalysis() {
 
     function generateRoutine() {
         let routine = [];
-        if (knowledgeLevel == 'I know nothing.') {
-               const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
-               const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen';
-        
-               routine.push(morningRoutine);
-               routine.push(eveningRoutine);
-              }
+        const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
+        const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
 
-        else if (knowledgeLevel == 'I am a novice' || knowledgeLevel == 'I am an expert!' ) {
-              const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected. And last use a Sunscreen with SPF 30, daily sunscreen use prevents the visual effects of aging.';
-              const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
-   
-              routine.push(morningRoutine);
-              routine.push(eveningRoutine);      
-        }
+        routine.push(morningRoutine);
+        routine.push(eveningRoutine);
 
         setRecRoutine(routine);
     }
@@ -68,8 +58,7 @@ export default function RoutineAnalysis() {
         <ThemedView style={styles.container}>
           <ThemedText style={styles.defaultText}> Hey { name }! Here's a routine to get started with!</ThemedText>
             <ThemedText style={styles.defaultText}>
-                  <ThemedText style={styles.defaultText}>{reccomendedRoutine[0]}</ThemedText>
-                  <ThemedText style={styles.defaultText}>{reccomendedRoutine[1]}</ThemedText>
+                  <ThemedText style={styles.defaultText}>{reccomendedRoutine[0]}{'\n'}{reccomendedRoutine[1]}</ThemedText>
             </ThemedText>
         </ThemedView>
       )
@@ -80,7 +69,7 @@ export default function RoutineAnalysis() {
         <ThemedView style={styles.container}>
           <ThemedText style={styles.defaultText}>{name}! Here's Your Skin Analysis</ThemedText>
           <ThemedText style={styles.defaultText}>
-                  We're still working on the engine to generate the analysis for you! Check back here soon!    
+                  Your skin is awesome there is no need for you to use this app! 😆   
           </ThemedText>
         </ThemedView>
       )
@@ -152,7 +141,7 @@ export default function RoutineAnalysis() {
     useEffect(() => {
       setTimeout(() => {
           setIsLoading(false);
-      }, 1500); // 2000 milliseconds = 2 seconds
+      }, 1500); // 1500 milliseconds = 1.5 seconds
       generateRoutine();
       generateAnalysis();
     }, [],

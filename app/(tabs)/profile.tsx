@@ -5,7 +5,7 @@ import { StyleSheet, ScrollView, TouchableOpacity, TextInput,
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, doc, where, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
 
 const { width, height } = Dimensions.get('window');
@@ -15,12 +15,14 @@ export default function ProfileScreen() {
 
     const params = useLocalSearchParams();
     const { username } = params;
+    const [userDocId, setUserDocId] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [goal, setGoal] = useState("");
     const [age, setAge] = useState("");
     const [type, setSkinType] = useState("");
     const [knowledgeLevel, setKnowledgeLevel] = useState("");
     const [name, setName] = useState("");
+    
     // Replace multiple useState calls with a single one for user profile data
     const [userProfile, setUserProfile] = useState({
             name: "",
@@ -45,6 +47,11 @@ export default function ProfileScreen() {
         if (isEditMode) {
         // Save changes when exiting edit mode
         setUserProfile({...tempUserProfile});
+
+
+        //add change to database
+        updateUserProfile(tempUserProfile);
+
         } 
         else {
         // Initialize temp data with current values when entering edit mode
@@ -82,10 +89,13 @@ export default function ProfileScreen() {
             const usersRef = collection(db, 'users');
             const q = query(usersRef, where("username", "==", username));
             const querySnapshot = await getDocs(q);
+
+            const userDocId = querySnapshot.docs[0].id;
+            setUserDocId(userDocId);
             if (!querySnapshot.empty) {
                 const userData = querySnapshot.docs[0].data();
                 setProperties(userData);
-
+                
                 // Update all user profile data at once
                 setUserProfile({
                     name: userData.skinProfile.name || "",
@@ -100,6 +110,28 @@ export default function ProfileScreen() {
             console.error("Error fetching user profile:", error);
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const updateUserProfile = async (newProfileObj: any) => {
+        try { 
+            // Reference to the specific document
+            const documentRef = doc(db, "users", userDocId);
+
+            await updateDoc(documentRef,  {
+                skinProfile: {
+                    name: newProfileObj.name,
+                    goal: newProfileObj.goal,
+                    age: newProfileObj.age,
+                    skinType: newProfileObj.skinType,
+                    knowledgeLevel: newProfileObj.knowledgeLevel,
+                }
+            });
+        }
+
+        catch (error) {
+            console.error("Error updating profile:", error);
+            return false;
         }
     };
 

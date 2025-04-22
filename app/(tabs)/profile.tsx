@@ -22,6 +22,9 @@ export default function ProfileScreen() {
     const [type, setSkinType] = useState("");
     const [knowledgeLevel, setKnowledgeLevel] = useState("");
     const [name, setName] = useState("");
+
+    const [reccomendedRoutine, setRecRoutine] = useState<string[]>([]);    
+
     
     // Replace multiple useState calls with a single one for user profile data
     const [userProfile, setUserProfile] = useState({
@@ -41,6 +44,18 @@ export default function ProfileScreen() {
     });
 
     const [isEditMode, setIsEditMode] = useState(false);
+
+
+    function generateRoutine() {
+        let routine = [];
+        const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
+        const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
+
+        routine.push(morningRoutine);
+        routine.push(eveningRoutine);
+
+        setRecRoutine(routine);
+    }
 
     // Handler to toggle edit mode
     const toggleEditMode = () => {
@@ -136,28 +151,10 @@ export default function ProfileScreen() {
     };
 
 
-    // function generateRoutine() {
-    //     let routine = [];
-    //     if (knowledgeLevel == 'I know nothing.') {
-    //            const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
-    //            const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen';
-        
-    //            routine.push(morningRoutine);
-    //            routine.push(eveningRoutine);
-    //           }
-
-    //     else if (knowledgeLevel == 'I am a novice' || knowledgeLevel == 'I am an expert!' ) {
-    //           const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected. And last use a Sunscreen with SPF 30, daily sunscreen use prevents the visual effects of aging.';
-    //           const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
-   
-    //           routine.push(morningRoutine);
-    //           routine.push(eveningRoutine);      
-    //     }
-    //     setRecRoutine(routine);
-    // }
 
     useEffect(() => {
         fetchUserProfile();
+        generateRoutine();
     }, [username]);
 
     if (isLoading) {
@@ -266,7 +263,7 @@ export default function ProfileScreen() {
                     <ThemedText style={styles.headerText}>Reccomended Skincare Routine</ThemedText>
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Plan</ThemedText>
-                        <ThemedText style={styles.goalText}>With the right routine, you're gonna be looking **** soon!</ThemedText>
+                        <ThemedText style={styles.goalText}>{reccomendedRoutine[0]}{`n`}{reccomendedRoutine[1   ]}</ThemedText>
                     </ThemedView>
                 </ThemedView>
 
@@ -274,7 +271,7 @@ export default function ProfileScreen() {
                     <ThemedText style={styles.headerText}>Skin Analysis Results</ThemedText>
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
-                        <ThemedText style={styles.goalText}>Skin analysis is a cool concept</ThemedText>
+                        <ThemedText style={styles.goalText}>Your skin is awesome there is no need for you to use this app! 😆</ThemedText>
                     </ThemedView>
                 </ThemedView>
 

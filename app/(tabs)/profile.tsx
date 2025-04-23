@@ -24,7 +24,6 @@ export default function ProfileScreen() {
     const [name, setName] = useState("");
 
     const [reccomendedRoutine, setRecRoutine] = useState<string[]>([]);    
-
     
     // Replace multiple useState calls with a single one for user profile data
     const [userProfile, setUserProfile] = useState({
@@ -263,7 +262,7 @@ export default function ProfileScreen() {
                     <ThemedText style={styles.headerText}>Reccomended Skincare Routine</ThemedText>
                     <ThemedView style={styles.analysisSection}>
                         <ThemedText style={styles.label}>Your Skincare Plan</ThemedText>
-                        <ThemedText style={styles.goalText}>{reccomendedRoutine[0]}{`n`}{reccomendedRoutine[1   ]}</ThemedText>
+                        <ThemedText style={styles.goalText}>{reccomendedRoutine[0]}{`n`}{reccomendedRoutine[1]}</ThemedText>
                     </ThemedView>
                 </ThemedView>
 

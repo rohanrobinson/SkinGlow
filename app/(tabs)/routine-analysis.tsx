@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, Text, TextInput, Image,
-    StyleSheet, ActivityIndicator, TouchableOpacity, Modal, ScrollView } from 'react-native';
+    StyleSheet, ActivityIndicator, TouchableOpacity, Modal, ScrollView, Dimensions } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useState, useEffect } from 'react';
@@ -21,6 +21,8 @@ import {
 import { serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
 
+const { width, height } = Dimensions.get('window');
+const scale = Math.min(width, height) / 375; // Using 375 as base width (this came from Claude)
 
 export default function RoutineAnalysis() {
 
@@ -39,7 +41,7 @@ export default function RoutineAnalysis() {
 
     function generateRoutine() {
         let routine = [];
-        const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected';
+        const morningRoutine = '🌞 In the morning use a gentle cleanser to remove oil and sweat from overnight. Also use a moisturizer that will keep your skin hydrated and protected.';
         const eveningRoutine = '🌙 In the evening use the same gentle cleanser from the morning to wash off dirt, oil, and sunscreen. Also use that moisturizer if your skin feels a bit dry.';
 
         routine.push(morningRoutine);
@@ -55,23 +57,30 @@ export default function RoutineAnalysis() {
 
     function displaySkinCareRoutine() {
       return (
-        <ThemedView style={styles.container}>
-          <ThemedText style={styles.defaultText}> Hey { name }! Here's a routine to get started with!</ThemedText>
-            <ThemedText style={styles.defaultText}>
-                  <ThemedText style={styles.defaultText}>{reccomendedRoutine[0]}{'\n'}{reccomendedRoutine[1]}</ThemedText>
-            </ThemedText>
-        </ThemedView>
+                <ThemedView style={styles.analysisCard}>
+                    <ThemedText style={styles.headerText}>Reccomended Skincare Routine</ThemedText>
+                    <ThemedView style={styles.analysisSection}>
+                        <ThemedText style={styles.label}>Your Skincare Plan</ThemedText>
+                        <ThemedText style={styles.goalText}>{reccomendedRoutine[0]}{reccomendedRoutine[1]}</ThemedText>
+                    </ThemedView>
+                </ThemedView>
       )
     }
 
     function displaySkinCareAnalysis() {
       return(
-        <ThemedView style={styles.container}>
-          <ThemedText style={styles.defaultText}>{name}! Here's Your Skin Analysis</ThemedText>
-          <ThemedText style={styles.defaultText}>
-                  Your skin is awesome there is no need for you to use this app! 😆   
-          </ThemedText>
-        </ThemedView>
+                // <ThemedView style={styles.analysisCard}>
+                //     <ThemedText style={styles.headerText}>Reccomended Skincare Analysis</ThemedText>
+                //     <ThemedText style={styles.label}>Your Skin Analysis</ThemedText>
+                //     <ThemedText style={styles.goalText}>Your skin is awesome there is no need for you to use this app! 😆</ThemedText>
+                // </ThemedView>
+                <ThemedView style={styles.analysisCard}>
+                <ThemedText style={styles.headerText}>Reccomended Skin Analysis</ThemedText>
+                <ThemedView style={styles.analysisSection}>
+                    <ThemedText style={styles.label}>Your Skin Analysis</ThemedText>
+                    <ThemedText style={styles.goalText}>Your skin is awesome there is no need for you to use this app! 😆</ThemedText>
+                </ThemedView>
+            </ThemedView>
       )
     }
 
@@ -157,7 +166,6 @@ export default function RoutineAnalysis() {
     }
 
     return (
-
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ThemedView style={styles.container}>
           <TouchableOpacity
@@ -200,14 +208,14 @@ export default function RoutineAnalysis() {
                         }
           </ThemedView>
 
-          <ThemedView>
+          <ThemedView style={styles.containerForInfo}>
             {
                 infoType === 'analysis'
                 
                 ?
                 displaySkinCareAnalysis()
                 :
-               displaySkinCareRoutine()  // Remove Text wrapper since the function already returns ThemedText
+               displaySkinCareRoutine() 
             }
             
           </ThemedView>
@@ -281,7 +289,7 @@ export default function RoutineAnalysis() {
               >
                   <ThemedView style={styles.modalBackground}>
                       <ThemedView style={styles.modalContent}>
-                          <ThemedText style={styles.defaultText}>Welcome to SkinGlow! 🎉</ThemedText>
+                          <ThemedText style={styles.defaultText}>Welcome to Skin Glow! 🎉</ThemedText>
                           <ThemedText style={styles.defaultText}>Your account has been created successfully!</ThemedText>
                           
                           <TouchableOpacity 
@@ -310,6 +318,10 @@ export default function RoutineAnalysis() {
 const styles = StyleSheet.create({
     container:{
       flex: 1, 
+      backgroundColor: '#EFE0F2',
+      alignItems: 'center', 
+    },
+    containerForInfo: {
       backgroundColor: '#EFE0F2',
       alignItems: 'center', 
     },
@@ -343,6 +355,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center', 
   },
+  analysisCard: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 20 * scale,
+    padding: 10 * scale,
+    paddingLeft: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginTop: 20 * scale
+},
   callToAction: {
     marginTop: 10,
   },
@@ -379,6 +407,34 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginTop: 20,
+},
+headerText: {
+  fontSize: Math.max(24 * scale, 18),
+  fontWeight: 'bold',
+  color: 'black',
+  marginBottom: 15 * scale,
+  textAlign: 'center',
+},
+
+analysisSection: {
+  marginTop: 15 * scale,
+  padding: 15 * scale,
+  backgroundColor: '#F8E8FA',
+  borderRadius: 10 * scale,
+},
+
+label: {
+  fontSize: Math.max(16 * scale, 14),
+  color: '#666',
+  fontWeight: '500',
+},
+
+goalText: {
+  fontSize: Math.max(16 * scale, 14),
+  color: 'black',
+  marginTop: 8 * scale,
+  fontStyle: 'italic',
+  lineHeight: 24 * scale,
 },
 logoFun: {
   marginTop: 30,

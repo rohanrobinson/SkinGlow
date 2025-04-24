@@ -269,7 +269,7 @@ export default function ProfileScreen() {
                 <ThemedView style={styles.analysisCard}>
                     <ThemedText style={styles.headerText}>Skin Analysis Results</ThemedText>
                     <ThemedView style={styles.analysisSection}>
-                        <ThemedText style={styles.label}>Your Skincare Analysis</ThemedText>
+                        <ThemedText style={styles.label}>Your Skin Analysis</ThemedText>
                         <ThemedText style={styles.goalText}>Your skin is awesome there is no need for you to use this app! 😆</ThemedText>
                     </ThemedView>
                 </ThemedView>

@@ -88,12 +88,15 @@ export default function HomeScreen() {
               source={require('@/assets/images/skinglow-logo.png')} 
              />
             <ThemedText style={styles.defaultText} type="title" >Skin Glow</ThemedText>
-              <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 2 Easy Steps</ThemedText> 
+              <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 3 Easy Steps</ThemedText> 
            <ThemedView style={styles.stepContainer}>
             <ThemedText  style={styles.defaultText} type="subtitle">(1) Answer a Few Questions</ThemedText>
           </ThemedView> 
+          <ThemedView style={styles.stepContainer}>
+            <ThemedText style={styles.defaultText}  type="subtitle"> (2) Upload a Picture of your Face</ThemedText>
+          </ThemedView>
            <ThemedView style={styles.stepContainer}>
-            <ThemedText style={styles.defaultText}  type="subtitle"> (2) View your Personalized Routine and Analysis</ThemedText>
+            <ThemedText style={styles.defaultText}  type="subtitle"> (3) View your Personalized Analysis <i>and</i> a picture of you at your potential best!</ThemedText>
           </ThemedView>
 
           <TouchableOpacity

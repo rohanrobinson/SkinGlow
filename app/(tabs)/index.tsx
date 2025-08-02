@@ -90,10 +90,10 @@ export default function HomeScreen() {
             <ThemedText style={styles.defaultText} type="title" >Skin Glow</ThemedText>
               <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 3 Easy Steps</ThemedText> 
            <ThemedView style={styles.stepContainer}>
-            <ThemedText  style={styles.defaultText} type="subtitle">(1) Answer a Few Questions</ThemedText>
+            <ThemedText  style={styles.defaultText} type="subtitle">(1) Upload a Picture of your Face</ThemedText>
           </ThemedView> 
           <ThemedView style={styles.stepContainer}>
-            <ThemedText style={styles.defaultText}  type="subtitle"> (2) Upload a Picture of your Face</ThemedText>
+            <ThemedText style={styles.defaultText}  type="subtitle"> (2) Answer a Few Questions</ThemedText>
           </ThemedView>
            <ThemedView style={styles.stepContainer}>
             <ThemedText style={styles.defaultText}  type="subtitle"> (3) View your Personalized Analysis <i>and</i> a picture of you at your potential best!</ThemedText>
@@ -101,7 +101,7 @@ export default function HomeScreen() {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => router.push('/user-info') }
+            onPress={() => router.push('/take-pics') }
           >
             <ThemedText style={styles.buttonText}>Start</ThemedText>
           </TouchableOpacity>
@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
     width: 200,
     justifyContent: 'center',
     alignItems: 'center',
+    cursor: 'pointer',
   },
   accountButton: {
     marginTop: 30,

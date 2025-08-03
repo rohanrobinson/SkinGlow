@@ -41,8 +41,7 @@ export default function TakePics() {
                     source={require('@/assets/images/skinglow-logo.png')} 
                     style={styles.logo}
                 />
-
-                <ThemedText style={styles.defaultText}>Take a picture to get started</ThemedText>
+                <ThemedText>Take a picture to get started</ThemedText>
 
                 <View style={styles.cameraContainer}>
                     {!imageTaken ? (

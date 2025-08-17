@@ -85,7 +85,9 @@ export default function HomeScreen() {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <ThemedView style={styles.container}>
             <Image style={styles.logoFun}
-              source={require('@/assets/images/skinglow-logo.png')} 
+              height={200}
+              width={200}
+              source={require('@/assets/images/girl-ai-logo.jpg')} 
              />
             <ThemedText style={styles.defaultText} type="title" >Skin Glow</ThemedText>
               <ThemedText style={styles.defaultText} type="subtitle">Look your Best in 3 Easy Steps</ThemedText> 
@@ -217,6 +219,8 @@ const styles = StyleSheet.create({
   },
   logoFun: {
     marginTop: 100,
+    height: 300,
+    width: 150,
   },
   titleContainer: {
     flexDirection: 'row',
